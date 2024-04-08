@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = " | Отзывы";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/reviews.css">
+}
+@section Scripts {
+        <script src="~/js/reviews-panel.js"></script>
+}
+
+<main class="page">
+    <section class="panel">
+        <h1 class="panel-title">Здесь вы можете оставить своё мнение о нас и нашем персонале!</h1><br><br>
+
+
+        <article class="reviews-item">
+            <main class="item" data-type="review">
+                <div class="review-info">
+                    <div class="rating" data-value="3">
+                        <input type="radio" disabled><label></label>
+                        <input type="radio" disabled><label></label>
+                        <input type="radio" disabled><label></label>
+                        <input type="radio" disabled><label></label>
+                        <input type="radio" disabled><label></label>
+                    </div>
+                    <div class="review-author">
+                        <div class="review-name">Владислав</div>
+                        <div class="review-surname">Якушев</div>
+                    </div>
+                    <div class="date-time">
+                        <div class="review-time">18:30</div>
+                        <div class="review-date">02.03.2024</div>
+                    </div>
+                </div>
+            </main>
+            <footer class="review-text">
+                <h2>Кафе крутое! Еда вкуская! Котики милые!</h2>
+            </footer>
+        </article>
+
+
+    </section>
+</main>
+
+
+<div class="reviews-window" style="z-index: 1000; position: relative;">
+</div>
+
+
+<footer>
+    <nav class="reviews-nav">
+        <div class="reviews-grid">
+            <button class="button" type="button" data-type="primary" data-types="reviews" data-size="medium">Оставить отзыв</button>
+        </div>
+    </nav>
+</footer>

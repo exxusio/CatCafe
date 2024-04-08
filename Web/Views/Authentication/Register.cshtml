@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = " | Регистрация";
+}
+
+@section Scripts {
+    <script src="~/js/login-birth.js"></script>
+}
+
+<form asp-action="Register" method="post">
+    <div>
+        <div class="form">
+            <label for="" class="container">
+                <span class="label">Логин</span>
+                <div class="container">
+                    <input type="login" class="input" placeholder="Login" required>
+                </div>
+            </label>
+        </div>
+        <div class="form">
+            <label for="" class="container">
+                <span class="label">Почта</span>
+                <div class="container">
+                    <input type="email" class="input" placeholder="example@mail.ru" required>
+                </div>
+            </label>
+        </div>
+        <div class="form" data-type="name">
+            <label for="" class="container">
+                <span class="label">Имя</span>
+                <div class="container" data-type="secondary">
+                    <input type="text" class="input" placeholder="Анатолий" required>
+                </div>
+            </label>
+        </div>
+        <div class="form" data-type="name">
+            <label for="" class="container">
+                <span class="label">Фамилия</span>
+                <div class="container" data-type="secondary">
+                    <input type="text" class="input" placeholder="Петров" required>
+                </div>
+            </label>
+        </div>
+        <div class="form" data-type="tel">
+            <label for="" class="container">
+                <span class="label">Номер телефона</span>
+                <div class="container" data-type="secondary">
+                    <input type="tel" class="input" placeholder="+375291234567" required>
+                </div>
+            </label>
+        </div>
+        <div class="form" data-type="date">
+            <label for="" class="container">
+                <span class="label">Дата рождения</span>
+                <div class="container" data-type="secondary" id="birth-date">
+                    <!-- Здесь будет создано поле для ввода даты -->
+                </div>
+            </label>
+        </div>
+        <div class="form">
+            <label for="" class="container">
+                <span class="label">Пароль</span>
+                <div class="container">
+                    <input type="pass" class="input" placeholder="Password" required>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="buttons">
+        <button class="button" type="submit" data-types="register" data-type="primary" data-size="medium">Зарегистрироваться</button>
+        <button class="button" type="button" data-types="login" data-size="medium" onclick="location.href='/login?ReturnUrl=%2F'">Войти</button>
+    </div>
+</form>

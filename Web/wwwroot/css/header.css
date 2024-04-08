@@ -1,0 +1,145 @@
+.info-panel {
+    width: 100%;
+    padding: 12px calc(50% - 640px);
+    border-bottom: 1px solid rgb(var(--background-color));
+    z-index: 101;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    height: 52px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.info-items {
+    white-space: nowrap;
+}
+
+.item[data-type="info"]:first-child {
+    margin-left: 0px;
+}
+
+.item[data-type="info"] {
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    transition: color 0.25s ease 0s, padding 0.25s ease 0s;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.item[data-type="info"]:hover {
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    font-weight: 600;
+    color: rgb(var(--primary-color-hover), 0.8);
+}
+
+.header {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 22px 0px 16px;
+    z-index: 100;
+    width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left {
+    display: flex;
+}
+
+.container[data-type="header"] {
+    color: rgb(0, 0, 0);
+    display: block;
+    width: 250px;
+}
+
+.header-primary-item, .header-secondary-item {
+    display: flex;
+    align-items: center;
+}
+
+.header-secondary-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.header-primary-item img {
+    width: 20%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.name, .mini-info {
+    text-align: center;
+}
+
+.name {
+    font-size: 25px;
+}
+
+.mini-name {
+    font-size: 20px;
+}
+
+.header-info {
+    font-size: 15px;
+}
+
+.header-info[data-type="phone"] {
+    color: rgb(var(--primary-color));
+}
+
+.right {
+    display: flex;
+    column-gap: 32px;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.button[data-type="auth"] {
+    margin-top: 0px;
+    background-color: rgb(var(--background-color));
+    color: rgb(var(--primary-color-hover));
+}
+
+.button[data-type="auth"]:hover {
+    color: rgb(38, 38, 39);
+}
+
+@media only screen and (max-width: 1439px)
+{
+    .info-panel {
+        padding: 12px calc(50% - 480px);
+    }
+
+    .header {
+        width: 960px;
+    }
+}
+
+@media only screen and (max-width: 1079px)
+{
+    .info-panel {
+        padding: 12px calc(50% - 320px);
+    }
+
+    .header {
+        width: 640px;
+    }
+
+    .container[data-type="header"] {
+        width: 191px;
+    }
+}

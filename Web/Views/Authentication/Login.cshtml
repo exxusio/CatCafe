@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = " | Вход";
+}
+
+<div>
+    <div class="form">
+        <label for="" class="container">
+            <span class="label">Логин</span>
+            <div class="container">
+                <input type="login" class="input" placeholder="Login" required>
+            </div>
+        </label>
+    </div>
+
+    <div class="form">
+        <label for="" class="container">
+            <span class="label">Пароль</span>
+            <div class="container">
+                <input type="pass" class="input" placeholder="Password" required>
+            </div>
+        </label>
+    </div>
+</div>
+<div class="buttons">
+    <button class="button" type="button" data-types="login" data-size="medium">Войти</button>
+    <button class="button" type="button" data-types="register" data-type="primary" data-size="medium" onclick="location.href='/register?ReturnUrl=%2F'">Зарегистрироваться</button>
+</div>

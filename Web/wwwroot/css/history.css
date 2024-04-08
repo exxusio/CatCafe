@@ -1,0 +1,114 @@
+.window[data-type="history"] {
+    width: 600px;
+    /* height: 800px; */
+    min-height: 372px;
+}
+
+.close[data-type="history"] {
+    left: 620px;
+}
+
+.history-list {
+    height: 600px;
+    overflow: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    outline: none;
+    box-shadow: none;
+    appearance: none;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 12px;
+    width: 100%;
+    border: 1px solid rgb(var(--primary-color), 0.5);
+    resize: none;
+    text-align: center;
+}
+
+.history-item {
+    width: calc(100% - 10px);
+    height: 64%;
+    background: rgb(255, 255, 255);
+    transition: box-shadow 150ms ease-out 0s;
+    box-shadow: rgba(6, 5, 50, 0.15) 0px 4px 22px -6px;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.item[data-type="history"] {
+    display: flex;
+    flex-direction: column;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.history-item-block {
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(var(--primary-color-hover), 0.8);
+}
+
+.history-text {
+    margin: 0px 0px 0px;
+    color: rgb(0, 0, 0);
+    font-size: 22px;
+    font-weight: 500;
+    text-align: start;
+    margin-bottom: 10px;
+}
+
+.item-picture[data-type="history"] {
+    width: 60px;
+    height: 60px;
+    flex: 0 0 auto;
+    pointer-events: none;
+    position: relative;
+    display: flex;
+    user-select: none;
+    image-rendering: auto;
+    flex-flow: column;
+}
+
+.history-container {
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+/* .history-container::-webkit-scrollbar {
+    display: none;
+} */
+
+.history-list-items {
+    display: flex;
+    align-items: flex-start;
+}
+
+.history-list-item {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.history-list-item .history-item-info {
+    visibility: hidden;
+    background-color: rgb(var(--primary-color-hover));
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 3px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.history-list-item:hover .history-item-info {
+    visibility: visible;
+}

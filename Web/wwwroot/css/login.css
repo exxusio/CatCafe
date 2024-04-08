@@ -1,0 +1,52 @@
+.window[data-type="login"] {
+    width: 409px;
+    min-height: 399px;
+}
+
+.form[data-type="name"], .form[data-type="tel"], .form[data-type="date"] {
+    display: inline-block;
+    width: 46.5%;
+}
+
+.form[data-type="tel"] {
+    margin-right: 20px;
+}
+
+.form[data-type="name"] + .form[data-type="name"] {
+    margin-left: 20px;
+}
+
+.input[data-type="birth"] {
+    display: inline-block;
+    text-align: center;
+    padding: 4px 6px;
+}
+
+.input[data-type="birth"].day {
+    width: 28%;
+}
+
+.input[data-type="birth"].month {
+    width: 44%;
+}
+
+.input[data-type="birth"].year {
+    width: 28%;
+}
+
+.button[data-types="register"] {
+    width: 60%;
+}
+
+.button[data-types="login"] {
+    width: 38%;
+}
+
+.button[data-types="login"] {
+    background-color: rgb(var(--secondary-color));
+    color: rgb(255, 255, 255);
+}
+
+.button[data-types="login"]:hover {
+    background-color: rgb(var(--secondary-color-hover));
+}

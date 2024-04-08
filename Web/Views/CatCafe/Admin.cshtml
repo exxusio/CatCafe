@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = " | Админ-панель";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css">
+
+}
+@section Scripts {
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
+    <script src='https://use.fontawesome.com/24fc242ce0.js'></script>  <!-- иконки -->
+    <script src="~/js/admin-panel.js"></script>
+}
+
+<div class="page">
+    <div class="panel" data-type="admin">
+        <div class="table-list">
+            <div id="table-list">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="admin-window" style="z-index: 1000; position: relative;">
+</div>

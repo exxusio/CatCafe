@@ -1,0 +1,64 @@
+.workers-item {
+    display: flex;
+    align-items: flex-start;
+    width: 80%;
+    background: rgb(255, 255, 255);
+    transition: box-shadow 150ms ease-out 0s;
+    box-shadow: rgba(6, 5, 50, 0.15) 0px 4px 22px -6px;
+    border-radius: 12px;
+    flex: 0 0 auto;
+    padding: 16px;
+    margin-right: 24px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.item[data-type="worker"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgb(var(--primary-color-hover), 0.5);
+    padding-left: 9px;
+    padding-right: 25px;
+}
+
+.worker-photo[data-type="worker"] {
+    width: 100%;
+}
+
+.worker-info {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(var(--background-color), 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.name-surname {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.worker-name, .worker-surname {
+    /*margin-right: 5px;*/
+    font-weight: bold;
+}
+
+.worker-name::after {
+    content: '|';
+    margin: 0 6px;
+}
+
+.worker-post, .worker-date {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.worker-about {
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-top: 0;
+}

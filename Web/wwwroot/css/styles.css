@@ -1,0 +1,253 @@
+@import url('./fonts.css');
+
+:root {
+    --primary-color: 168, 168, 168;
+    --primary-color-hover: 107, 107, 107;
+    --background-color: 243, 243, 247;
+    --secondary-color: 97, 97, 97;
+    --secondary-color-hover: 68, 68, 68;
+}
+
+#cat-cafe {
+    min-height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+body {
+    font-family: 'Reef';
+    margin: 0px;
+    padding: 0px;
+    direction: ltr;
+    min-width: 1024px;
+    height: 100%;
+    overflow: auto;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 400;
+    background: rgb(255, 255, 255);
+    -webkit-font-smoothing: antialiased;
+    font-variant-ligatures: no-common-ligatures;
+    
+}
+
+.page {
+    padding-top: 60px;
+}
+
+.panel {
+    position: relative;
+    width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 0 auto;
+}
+
+.panel-title {
+    width: 100%;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 36px;
+    margin: 0px 0px 32px 0px;
+}
+
+.close {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 20px;
+    transition: transform 600ms ease;
+}
+
+.close:hover {
+    transform: rotate(180deg);
+}
+
+.background {
+    position: fixed;
+    inset: 0px;
+    background: rgb(0, 0, 0, 0.64);
+    transition: opacity 150ms ease 0s;
+    opacity: 0;
+}
+
+.object {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    pointer-events: auto;
+}
+
+.object[data-type="mobile"] {
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1);
+    transform: translateY(-100%);
+}
+
+.frame {
+    padding: 24px;
+    display: flex;
+    flex-flow: column;
+}
+
+.window {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 30px 60px;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    transition: opacity 150ms ease 0s, transform;
+    padding: 32px;
+}
+
+.form {
+    flex: 1 0 auto;
+}
+
+.info {
+    flex: 0 0 auto;
+}
+
+.title {
+    margin: 0px 0px 8px;
+    color: rgb(0, 0, 0);
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 36px;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgb(var(--primary-color-hover));
+    margin: 0px 0px 24px;
+}
+
+.buttons {
+    display: inline-block;
+    width: 100%;
+    flex: 1 0 auto;
+}
+
+.button {
+    width: 100%;
+    margin-top: 16px;
+    outline: none;
+    border: none;
+    border-radius: 9999px;
+    text-align: center;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition-property: background-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+}
+
+.button[data-type="primary"] {
+    background-color: rgb(var(--primary-color));
+    color: rgb(255, 255, 255);
+}
+
+.button[data-size="medium"] {
+    height: 48px;
+    padding: 12px 24px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.button[data-size="small"] {
+    height: 32px;
+    padding: 8px 16px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.button[data-type="primary"]:hover {
+    background-color: rgb(var(--primary-color-hover));
+}
+
+.container {
+    position: relative;
+}
+
+.container[data-type="secondary"] {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.label {
+    margin-bottom: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    position: relative;
+    display: block;
+    color: rgb(var(--primary-color-hover));
+    text-align: left;
+}
+
+.input {
+    text-align: center;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    appearance: none;
+    box-sizing: border-box;
+    position: relative;
+    height: 48px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    width: 100%;
+    border: 1px solid rgb(var(--primary-color), 0.5);
+    resize: none;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    font-variant-ligatures: no-common-ligatures;
+    transition-property: background-color, border-color;
+    transition-duration: 100ms;
+    transition-timing-function: ease-out;
+}
+
+.input option[disabled] {
+    color: rgb(var(--primary-color-hover));
+}
+
+.input:focus {
+    border: 1px solid rgb(var(--primary-color-hover));
+    background-color: rgb(255, 255, 255);
+    outline: none;
+}
+
+@media only screen and (max-width: 1439px)
+{
+    .panel {
+        width: 960px;
+    }
+}
+
+@media only screen and (max-width: 1079px)
+{
+    .panel {
+        width: 640px;
+    }
+}

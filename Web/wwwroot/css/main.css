@@ -1,0 +1,128 @@
+.group-panel {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.group-item {
+    display: flex;
+    flex-flow: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    cursor: pointer;
+    width: 282.6px;
+    margin-right: 37.3333px;
+}
+
+.item[data-type="main"] {
+    margin: 0px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(var(--primary-color-hover));
+    font-weight: 400;
+}
+
+.item-picture[data-type="main"] {
+    margin: 0px;
+    position: relative;
+    width: 90%;
+    border-radius: 12px;
+    top: 0px;
+    transition: top 150ms ease-out 0s;
+    position: relative;
+    display: flex;
+    user-select: none;
+    image-rendering: auto;
+    flex-flow: column;
+    transition: transform 0.2s ease;
+    transform: translateY(0);
+}
+
+.item-picture[data-type="main"]:hover {
+    transform: translateY(3%);
+}
+
+.item-title {
+    margin: 8px 0px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.item-name {
+    text-decoration: none;
+    color: inherit;
+}
+
+.item-footer {
+    margin-top: 16px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.item-price {
+    flex: 0 1 auto;
+    padding-right: 4px;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    line-height: 22px;
+    display: flex;
+    flex-flow: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.buy-item {
+    outline: none;
+    border: none;
+    border-radius: 9999px;
+    text-align: center;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition-property: background-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+}
+
+.buy-item[data-size="medium"] {
+    height: 40px;
+    padding: 8px 20px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.buy-item[data-type="select"] {
+    background-color: rgb(var(--primary-color), 0.3);
+    color: rgb(0, 0, 0);
+}
+
+.buy-item[data-type="select"]:hover {
+    background-color: rgb(var(--primary-color-hover), 0.4);
+}
+
+@media only screen and (max-width: 1439px)
+{
+    .panel[data-type="main"] {
+        width: 960px;
+    }
+
+    .group-item {
+        width: 218px;
+        margin-right: 29.3333px;
+    }
+}
+
+@media only screen and (max-width: 1079px)
+{
+    .panel[data-type="main"] {
+        width: 640px;
+    }
+}

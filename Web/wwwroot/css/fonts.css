@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Reef';
+    src: local('Reef Bold'), local('Reef-Bold'), url('../content/font/Reefbold.woff2') format('woff2'), url('../content/font/Reefbold.woff') format('woff'), url('../content/font/Reefbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}

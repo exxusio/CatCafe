@@ -1,0 +1,20 @@
+.contacts-item {
+    position: relative;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    margin-bottom: 110px;
+}
+
+.contacts-text {
+    font-size: 18px;
+    line-height: 26px;
+    width: 75%;
+    white-space: pre-wrap;
+}
+
+.contacts-footer {
+    bottom: -30px;
+    padding-bottom: 8%;
+    margin-bottom: -6%;
+    position: relative;
+}

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/fonts.css">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/login.css">
+    <link rel="icon" href="~/content/logo.svg" type="image/x-icon">
+    <title>CAT-CAFE @ViewData["Title"]</title>
+</head>
+<body>
+
+
+
+    <div>
+        <div class="object">
+            <div class="background" style="opacity: 1;"></div>
+            <div class="frame">
+                <div class="window" data-type="login">
+                    <div class="info">
+                        <div class="title">Вход на сайт</div>
+                        <div class="description">Вкусные пиццы - Горячие напитки - Приятная обстановка - Кошечки и мягкие игрушки<br>Где ты еще такое видел?</div>
+                    </div>
+
+
+                    @RenderBody()
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

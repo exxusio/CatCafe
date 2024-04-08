@@ -1,0 +1,167 @@
+.reviews-item {
+    display: flex;
+    align-items: flex-start;
+    width: 80%;
+    background: rgb(255, 255, 255);
+    transition: box-shadow 150ms ease-out 0s;
+    box-shadow: rgba(6, 5, 50, 0.15) 0px 4px 22px -6px;
+    border-radius: 12px;
+    flex: 0 0 auto;
+    padding: 16px;
+    margin-right: 24px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.item[data-type="review"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgb(var(--primary-color-hover), 0.5);
+    padding-left: 9px;
+    padding-right: 25px;
+}
+
+.review-info {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.review-author {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.review-name, .review-surname {
+    font-weight: bold;
+}
+
+.review-name::after {
+    content: '|';
+    margin: 0 6px;
+}
+
+.rating {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: row-reverse;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.rating[data-type="reviews"] {
+    margin-bottom: 0px;
+    margin-top: 16px;
+}
+
+.rating-0 {
+    filter: grayscale(100%);
+}
+  
+.rating > input {
+    display: none;
+}
+  
+.rating > label {
+    cursor: auto;
+    width: 20px;
+    height: 20px;
+    margin-top: auto;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 76%;
+    transition: .3s;
+}
+
+.rating[data-type="reviews"] > label {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+}
+
+.rating > input:checked ~ label,
+.rating > input:checked ~ label ~ label {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+  
+.rating[data-type="reviews"] > input:not(:checked) ~ label:hover,
+.rating[data-type="reviews"] > input:not(:checked) ~ label:hover ~ label {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+
+.rating[data-value="5"] label:nth-last-child(-n+9),
+.rating[data-value="4"] label:nth-last-child(-n+7),
+.rating[data-value="3"] label:nth-last-child(-n+5),
+.rating[data-value="2"] label:nth-last-child(-n+3),
+.rating[data-value="1"] label:nth-last-child(-n+1) {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+
+.date-time {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.review-time, .review-date {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.review-time::after {
+    content: '-';
+    margin: 0 6px;
+}
+
+.review-text {
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-top: 0;
+}
+
+.reviews-nav {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    box-shadow: rgba(6, 5, 50, 0.1) 0px 4px 30px;
+    background-color: rgba(255, 255, 255);
+}
+
+.reviews-grid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button[data-types="reviews"] {
+    height: 40px;
+    width: 300px;
+    margin-top: 0px;
+    padding: 8px 20px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.window[data-type="reviews"] {
+    width: 700px;
+    min-height: 372px;
+}
+
+.input[data-type="reviews"] {
+    text-align: left;
+    height: 200px;
+}
+
+.close[data-type="reviews"] {
+    left: 720px;
+}

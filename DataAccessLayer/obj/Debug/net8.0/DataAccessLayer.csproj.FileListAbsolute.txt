@@ -1,0 +1,14 @@
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.deps.json
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.runtimeconfig.json
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\bin\Debug\net8.0\DataAccessLayer.pdb
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.AssemblyInfo.cs
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\refint\DataAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.pdb
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\DataAccessLayer.genruntimeconfig.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\DataAccessLayer\obj\Debug\net8.0\ref\DataAccessLayer.dll

@@ -1,49 +1,182 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/fonts.css">
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/header.css">
+    <link rel="stylesheet" href="~/css/nav.css">
+    <link rel="stylesheet" href="~/css/basket.css">
+    <link rel="stylesheet" href="~/css/reservation.css">
+    <link rel="stylesheet" href="~/css/tables.css">
+    <link rel="stylesheet" href="~/css/history.css">
+    @await RenderSectionAsync("Styles", required: false)
+
+    <link rel="icon" href="~/content/logo.svg" type="image/x-icon">
+    <title>CAT-CAFE @ViewData["Title"]</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div id="cat-cafe">
+        <div class="info-panel">
+            <div class="info-items">
+                <a class="item" data-type="info" asp-area="" asp-action="about">О нас</a>
+                <a class="item" data-type="info" asp-area="" asp-action="contacts">Контакты</a>
+                <a class="item" data-type="info" asp-area="" asp-action="workers">Наши работники</a>
+                <a class="item" data-type="info" asp-area="" asp-action="reviews">Отзывы</a>
+
+                @* @if (User.IsInRole("Admin"))
+                {
+                    <a class="item" data-type="info" asp-area="" asp-action="admin">Администрирование</a>
+                } *@
+            </div>
+        </div>
+        <header class="header">
+            <div class="left">
+                <a href="./index.html" class="container" data-type="header">
+                    <div class="header-primary-item">
+                        <img src="~/content/logo.svg" alt="">
+                        <div>
+                            <div class="name">CAT-CAFE</div>
+                            <div class="header-info">Котики и кофе</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="container" data-type="header" id="reservation">
+                    <div class="header-secondary-item">
+                        <div>
+                            <div class="mini-name">Бронирование</div>
+                            <div class="header-info">Бронирование в один клик!</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="tel:" class="container" data-type="header">
+                    <div class="header-secondary-item">
+                        <div>
+                            <div class="mini-name">101</div>
+                            <div class="header-info" data-type="phone">Звонок по телефону</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="right">
+                <button class="button" type="button" data-type="auth" data-size="small">Выйти</button>
+            </div>
+        </header>
+        <nav class="nav">
+            <div class="panel" data-type="nav">
+                <div class="logo">
+                    <img src="./content/logo.svg" alt="">
+                </div>
+                <nav class="list">
+                    <div class="nav-list">
+                        <div class="list-item">
+                            <a href="#pizza" class="item" data-type="nav">Пицца</a>
+                        </div>
+                        <div class="list-item">
+                            <a href="#" class="item" data-type="nav">Напитки</a>
+                        </div>
+                        <div class="list-item">
+                            <a href="#" class="item" data-type="nav">Закуски</a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="basket">
+                    <form class="search" action="#">
+                        <input id="search-box" type="text" class="search-box">
+                        <div>
+                            <span class="search-icon">
+                                <svg viewBox="0 0 12 12" width="12" height="12">
+                                    <circle cx="5" cy="5" r="4" fill="none" stroke-width="2"></circle>
+                                    <line x1="8.5" y1="8.5" x2="11.5" y2="11.5" stroke-width="2"></line>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="notification">!</div>
+                        <input type="submit" id="search-submit">
+                    </form>
+                    <button class="filter">
+                        <div class="filter-box"></div>
+                        <div>
+                            <span class="filter-icon">
+                                <svg viewBox="0 0 12 12" width="12" height="12">
+                                    <rect x="1" y="1" width="10" height="1" />
+                                    <rect x="1" y="5" width="10" height="1" />
+                                    <rect x="1" y="9" width="10" height="1" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="notification" style="right: 222px;">!</div>
+                    </button>
+                    <div class="filter-panel" style="opacity: 0;">
+                        <ul class="filter-list">
+                            <li class="filter-list-item">
+                                <h4 class="filter-text">Сначала дешевые</h4>
+                                <input class="filter-list-toggle" id="cheap" type="checkbox" />
+                                <label class="filter-list-button" for="cheap"></label>
+                            </li>
+                            <li class="filter-list-item">
+                                <h4 class="filter-text">Сначала дорогие</h4>
+                                <input class="filter-list-toggle" id="expensive" type="checkbox" />
+                                <label class="filter-list-button" for="expensive"></label>
+                            </li>
+                        </ul>
+                        <div class="filter-price">
+                            <div class="filter-input">
+                                <div class="filter-field">
+                                    <h4 class="filter-text">Мин</h4>
+                                    <input type="number" class="input" data-type="filter" id="input-min" min="0" max="100" value="0">
+                                </div>
+                                <div class="separator">-</div>
+                                <div class="filter-field">
+                                    <h4 class="filter-text">Макс</h4>
+                                    <input type="number" class="input" data-type="filter" id="input-max" min="0" max="100" value="100">
+                                </div>
+                            </div>
+                            <div class="filter-slider">
+                                <div class="filter-progress"></div>
+                            </div>
+                            <div class="filter-range-input">
+                                <input type="range" id="range-min" min="0" max="100" value="0" step="1">
+                                <input type="range" id="range-max" min="0" max="100" value="100" step="1">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="history" id="buttonHistory">
+                        <div class="history-box"></div>
+                        <div>
+                            <span class="history-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="14" height="14">
+                                    <path d="m6.099031,2.86593a4.036017,4.036017 0 1 1 -4.036017,4.036017" fill="none" stroke-width="2" />
+                                    <path id="svg_4" d="m4.791516,2.935332l0.508975,-0.508975l0,1.01795l-0.508975,-0.508975z" fill-opacity="null" stroke-opacity="null" stroke-width="2" fill="none" />
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
+                    <button class="button" data-type="primary" data-types="nav" data-size="medium" type="button">Корзина</button>
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="basket-window" style="z-index: 1000; position: relative;">
+        </div>
+        <div class="reservation-window" style="z-index: 1000; position: relative;">
+        </div>
+        <div class="reservation-table" style="z-index: 1001; position: relative;">
+        </div>
+        <div class="history-window" style="z-index: 1000; position: relative;">
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderBody()
+
+
+    <script src="~/js/nav-panel.js"></script>
+    <script src="~/js/basket-panel.js"></script>
+    <script src="~/js/reservation-panel.js"></script>
+    <script src="~/js/table-panel.js"></script>
+    <script src="~/js/history-panel.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

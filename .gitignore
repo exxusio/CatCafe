@@ -1,3 +1,12 @@
 .vs/
+PresentationAccessLayer/bin/
+PresentationAccessLayer/obj/
+BusinessAccessLayer/bin/
+BusinessAccessLayer/obj/
+BusinessAccessLayer/bin/
+BusinessAccessLayer/obj/
 Web/bin/
 Web/obj/
+Web/wwwroot/json-test/
+Web/wwwroot/content/image/pepperoni
+Web/wwwroot/content/image/test

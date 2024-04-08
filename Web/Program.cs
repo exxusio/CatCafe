@@ -1,27 +1,67 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//builder.Services.AddDbContext<CatCafeContext>(options =>
+//{
+//    var connectionString = builder.Configuration.GetConnectionString("CatCafeDataBase");
+//    options.UseNpgsql(connectionString);
+//});
+
+//builder.Services.AddDefaultIdentity<IdentityUser>(options
+//    => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<CatCafeContext>();
+
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//    options.LoginPath = "/login";
+//    options.ReturnUrlParameter = "ReturnUrl";
+//});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+app.Use(async (context, next) =>
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    await next();
+
+    if (context.Response.StatusCode == 404)
+    {
+        context.Response.Redirect("/");
+    }
+});
+
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path.Value;
+    if (path.StartsWith("/identity"))
+    {
+        context.Response.Redirect("/login");
+        return;
+    }
+    await next();
+});
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    name: "catcafe",
+    pattern: "{action}/{id?}",
+    defaults: new { controller = "catcafe", action = "main" });
+
+app.MapControllerRoute(
+    name: "authentication",
+    pattern: "{action}/{id?}",
+    defaults: new { controller = "authentication", action = "login" });
+
+app.MapGet("/main", () => { return Results.Redirect("/"); });
+
+//app.MapRazorPages();
 
 app.Run();

@@ -1,0 +1,139 @@
+.window[data-type="reservation"] {
+    width: 500px;
+    min-height: 372px;
+}
+
+.form[date-type="date"], .form[date-type="time"] {
+    display: inline-block;
+    width: 46.5%;
+}
+
+.form[date-type="time"] {
+    margin-left: 26px;
+}
+
+.input[data-type="reservation"] {
+    display: inline-block;
+    padding: 4px 6px;
+}
+
+.input[data-type="reservation"].day {
+    width: 48%;
+    margin-right: 4px;
+}
+
+.input[data-type="reservation"].month {
+    width: 50%;
+}
+
+.close[data-type="reservation"] {
+    left: 520px;
+}
+
+
+
+.cats-list {
+    height: 300px;
+    overflow: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    outline: none;
+    box-shadow: none;
+    appearance: none;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 12px;
+    width: 100%;
+    border: 1px solid rgb(var(--primary-color), 0.5);
+    resize: none;
+    text-align: center;
+}
+
+.cats-item {
+    display: flex;
+    align-items: flex-start;
+    width: calc(50% - 10px);
+    background: rgb(255, 255, 255);
+    transition: box-shadow 150ms ease-out 0s;
+    box-shadow: rgba(6, 5, 50, 0.15) 0px 4px 22px -6px;
+    border-radius: 12px;
+    flex: 0 0 auto;
+    padding: 16px;
+    margin-right: 10px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.item[data-type="cats"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.item-picture[data-type="cats"] {
+    width: 100%;
+}
+
+.cats-info {
+    text-align: center;
+    padding-top: 10px;
+    border-radius: 10px;
+}
+
+.cats-name {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.cat-name {
+    font-weight: bold;
+}
+
+.info-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 15px;
+    border: 1px solid rgb(0, 0, 0);
+    position: relative;
+    cursor: pointer;
+}
+
+.info-icon::after {
+    content: 'i';
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.info-icon:hover::before {
+    content: attr(content); 
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    left: -725%;
+    bottom: 130%;
+    display: none;
+    width: 200px;
+    max-width: 300px;
+    white-space: pre-line;
+    display: inline-block;
+}
+
+.info-icon:hover::before {
+    display: block;
+}

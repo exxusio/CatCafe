@@ -1,0 +1,289 @@
+.table-frame {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    /* position: absolute; */
+    overflow: hidden;
+    width: 836px;
+    height: 636px;
+}
+
+.window[data-type="table"] {
+    width: 900px;
+    height: 760px;
+}
+
+.close[data-type="table"] {
+    left: 920px;
+}
+
+.table-in, .table-left, .table-right {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    top: 0;
+    overflow: hidden;
+}
+
+.table-in {
+    /* width: 100%;
+    position: absolute;
+    padding: 28px; */
+    width: 93%;
+    height: 83.7%;
+    top: 32px;
+    padding: 28px;
+    position: absolute;
+}
+
+.table-left {
+    width: 45.7%;
+    position: relative;
+    left: 0;
+}
+
+.table-right {
+    width: 40.5%;
+    position: absolute;
+    padding: 28px;
+    right: 0;
+}
+
+.table-checkbox {
+    display: none;
+}
+
+.table[data-type="table"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 94px;
+    height: 94px;
+    background: rgba(var(--primary-color), 0.5);
+    position: relative;
+    border-radius: 50%;
+}
+
+.table[data-type="table"]::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 0px solid rgba(0, 128, 0, 0);
+    border-radius: 50%;
+    transition: border-color 0.3s ease, border-width 0.3s ease;
+}
+
+.table-checkbox:checked + .table[data-type="table"]::after {
+    border-color: rgb(108, 218, 108);
+    border-width: 7px;
+}
+
+.table-title {
+    color: rgba(0,0,0,1);
+    position: absolute;
+    font-size: 20px;
+    text-align: center;
+}
+
+.table-A, .table-B, .table-C, .table-D {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    overflow: hidden;
+}
+
+.table-A {
+    width: 100%;
+    height: 60.9%;
+    left: 0;
+    bottom: 0;
+}
+
+.table-B {
+    width: 96.5%;
+    margin-left: 38px;
+    position: relative;
+    height: 138px;
+    top: 0;
+}
+
+.table-C {
+    width: 41%;
+    position: absolute;
+    height: 60%;
+    bottom: 0;
+}
+
+.table-D {
+    width: 49%;
+    position: absolute;
+    height: 60%;
+    bottom: 0;
+    right: 0;
+}
+
+.A-1, .A-2, .A-3, .A-4, .A-5, .A-6, .A-7, .A-8, .A-9, .B-1, .B-2, .C-1, .C-2, .C-3, .D-1, .D-2, .D-3 {
+    width: 94px;
+    height: 94px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    overflow: hidden;
+}
+
+.A-1, .B-1, .C-1, .D-1 {
+    top: 23px;
+    left: 22px;
+}
+
+.A-2, .C-2, .D-2 {
+    top: 130px;
+    left: 22px;
+}
+
+.A-3, .C-3, .D-3 {
+    top: 237px;
+    left: 22px;
+}
+
+.A-4, .B-2 {
+    top: 23px;
+    left: 130px;
+}
+
+.A-5 {
+    top: 130px;
+    left: 130px;
+}
+
+.A-6 {
+    top: 237px;
+    left: 130px;
+}
+
+.A-7 {
+    top: 23px;
+    left: 237px;
+}
+
+.A-8 {
+    top: 130px;
+    left: 237px;
+}
+
+.A-9 {
+    top: 237px;
+    left: 237px;
+}
+
+.wall-all, .wall-left, .wall-center, .wall-right {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.wall-up {
+    /* width: 100%;
+    height: 28px;
+    background: rgba(151,151,151,1);
+    position: absolute;
+    top: 0px;
+    left: 0px; */
+    width: 100%;
+    height: 28px;
+    background: rgba(var(--primary-color-hover), 0.7);
+}
+
+.wall-all {
+    /* display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%; */
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 95.6%;
+}
+
+.wall-left {
+    /* width: 49.3%; */ /* 270 */
+    width: 49%;
+}
+
+.wall-center {
+    /* width: 10.2%; */ /*56*/
+    width: 10.5%;
+}
+
+.wall-right {
+    /* width: 40.5%; */ /*222*/
+    width: 40.5%;
+}
+
+.wall-door {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 28px;
+    background: rgba(var(--primary-color), 0.4);
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.title-door {
+    color: rgba(0,0,0,1);
+    font-size: 20px;
+    
+}
+
+.wall-1, .wall-2 {
+    background: rgba(var(--primary-color-hover), 0.7);
+    position: absolute;
+}
+
+.wall-1[data-type="left"] {
+    width: 28px;
+    height: 100%;
+}
+
+.wall-1[data-type="bottom"] {
+    width: 86.3%;
+    height: 28px;
+    bottom: 0;
+    margin: 0 28px 0 28px;
+}
+
+.wall-1[data-type="right"] {
+    width: 28px;
+    height: 60%;
+    bottom: 0;
+    right: 0;
+}
+
+.wall-2[data-type="right"] {
+    width: 28px;
+    height: 100%;
+    right: 0;
+}
+
+.wall-2[data-type="bottom"] {
+    width: 83.5%;
+    height: 28px;
+    bottom: 0;
+    margin: 0 28px 0 28px;
+}
+
+.wall-2[data-type="left"] {
+    width: 28px;
+    height: 60%;
+    bottom: 0;
+    left: 0;
+}
