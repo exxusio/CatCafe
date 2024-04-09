@@ -1,13 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer;
+using DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web.Controllers
 {
     //[Authorize]
     public class CatCafeController : Controller
     {
-        public IActionResult Main()
+        private DataManager _dataManager;
+
+        public CatCafeController(DataManager dataManager)
         {
-            return View();
+            _dataManager = dataManager;
+        }
+
+        public async Task<IActionResult> Main()
+        {
+            List<Products> products = (await _dataManager.products.GetAll(true)).ToList();
+
+            return View(products);
         }
 
         public IActionResult About()

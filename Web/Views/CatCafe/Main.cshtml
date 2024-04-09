@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<DataAccessLayer.Entities.Products>
+
+@{
     ViewData["Title"] = "";
 }
 
@@ -225,25 +227,30 @@
 
 <div class="page">
     <main class="panel" data-type="main">
-        <section class="group-panel" id="pizza">
-            <h2 class="panel-title">Пицца</h2>
-            <article class="group-item">
-                <main class="item" data-type="main">
-                    <picture class="item-picture" data-type="main">
-                        <img src="./content/image/pepperoni.png" alt="">
-                    </picture>
-                    <div class="item-title">
-                        <a href="" class="item-name">Пепперони</a>
-                    </div>
-                    Пикантная пепперони, мно-о-ого моцареллы и томатный соус. Самая популярная пицца
-                </main>
-                <footer class="item-footer">
-                    <div class="item-price">13,99 руб.</div>
-                    <button class="buy-item" type="button" data-type="select" data-size="medium">Выбрать</button>
-                </footer>
-            </article>
+        @foreach (var productType in Model.Select(p => p.type.name).Distinct())
+        {
+            <section class="group-panel" id="@productType.ToLower()">
+                <h2 class="panel-title">@productType</h2>
 
-
-        </section>
+                @foreach (var product in Model.Where(p => p.type.name == productType))
+                {
+                    <article class="group-item">
+                        <main class="item" data-type="main">
+                            <picture class="item-picture" data-type="main">
+                                <img src="./content/image/pepperoni.png" alt="">
+                            </picture>
+                            <div class="item-title">
+                                <a href="" class="item-name">@product.name</a>
+                            </div>
+                            @product.description
+                        </main>
+                        <footer class="item-footer">
+                            <div class="item-price">@product.price руб.</div>
+                            <button class="buy-item" type="button" data-type="select" data-size="medium">Выбрать</button>
+                        </footer>
+                    </article>
+                }
+            </section>
+        }
     </main>
 </div>

@@ -2,7 +2,7 @@
 {
     public partial class Contents
     {
-        public int contentID { get; set; }
+        public int ID { get; set; }
 
         public int orderID { get; set; }
 

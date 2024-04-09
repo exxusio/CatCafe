@@ -2,7 +2,7 @@
 {
     public partial class ReservationCats
     {
-        public int reservationCatID { get; set; }
+        public int ID { get; set; }
 
         public int reservationID { get; set; }
 

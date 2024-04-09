@@ -2,7 +2,7 @@
 {
     public partial class Products
     {
-        public int productID { get; set; }
+        public int ID { get; set; }
 
         public string name { get; set; } = null!;
 
@@ -14,8 +14,8 @@
 
         public decimal price { get; set; }
 
-        public virtual ICollection<Contents> content { get; set; } = new List<Contents>();
+        public virtual ICollection<Contents> contents { get; set; } = new List<Contents>();
 
-        public virtual Types type { get; set; } = null!;
+        public virtual ProductTypes type { get; set; } = null!;
     }
 }

@@ -2,7 +2,7 @@
 {
     public partial class Cats
     {
-        public int catID { get; set; }
+        public int ID { get; set; }
 
         public string name { get; set; } = null!;
 
@@ -12,10 +12,10 @@
 
         public DateOnly dateOfBirth { get; set; }
 
-        public string? characterDescription { get; set; }
+        public string? descriptionCharacter { get; set; }
 
         public virtual Breeds breed { get; set; } = null!;
 
-        public virtual ICollection<ReservationCats> reservationCat { get; set; } = new List<ReservationCats>();
+        public virtual ICollection<ReservationCats> reservationCats { get; set; } = new List<ReservationCats>();
     }
 }

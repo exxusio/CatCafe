@@ -2,15 +2,15 @@
 {
     public partial class Reviews
     {
-        public int reviewID { get; set; }
+        public int ID { get; set; }
 
         public int visitorID { get; set; }
 
-        public string? reviewText { get; set; }
+        public string? text { get; set; }
 
-        public DateOnly reviewDate { get; set; }
+        public DateOnly date { get; set; }
 
-        public TimeOnly reviewTime { get; set; }
+        public TimeOnly time { get; set; }
 
         public int rating { get; set; }
 

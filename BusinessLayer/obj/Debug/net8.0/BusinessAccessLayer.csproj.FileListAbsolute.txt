@@ -1,0 +1,16 @@
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\bin\Debug\net8.0\BusinessAccessLayer.deps.json
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\bin\Debug\net8.0\BusinessAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\bin\Debug\net8.0\BusinessAccessLayer.pdb
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.AssemblyInfoInputs.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.AssemblyInfo.cs
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\refint\BusinessAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.pdb
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\ref\BusinessAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\bin\Debug\net8.0\DataAccessLayer.dll
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\bin\Debug\net8.0\DataAccessLayer.pdb
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.csproj.AssemblyReference.cache
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.sourcelink.json
+C:\Users\vladi\OneDrive\Desktop\Курсач\CatCafe\BusinessAccessLayer\obj\Debug\net8.0\BusinessAccessLayer.csproj.CopyComplete

@@ -2,7 +2,7 @@
 {
     public partial class Accounts
     {
-        public int accountID { get; set; }
+        public int ID { get; set; }
 
         public int visitorID { get; set; }
 
