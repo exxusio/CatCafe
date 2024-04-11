@@ -1,48 +1,54 @@
 ﻿using BusinessLayer;
-using DataAccessLayer.Entities;
+using PresentationLayer;
+using PresentationLayer.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
     //[Authorize]
-    public class CatCafeController : Controller
+    public class MainController : Controller
     {
         private DataManager _dataManager;
+        private ServicesManager _servicesManager;
 
-        public CatCafeController(DataManager dataManager)
+        public MainController(DataManager dataManager)
         {
             _dataManager = dataManager;
+            _servicesManager = new ServicesManager(_dataManager);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Main()
         {
-            List<Products> products = (await _dataManager.products.GetAll(true)).ToList();
-
-            return View(products);
+            return View(await _servicesManager.products.GetList());
         }
 
+        [HttpGet]
         public IActionResult About()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Contacts()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Workers()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Reviews()
         {
             return View();
         }
 
-        //[Authorize(Roles = "Admin")]
+        [HttpGet]//[Authorize(Roles = "Admin")]
         public IActionResult Admin()
         {
             return View();

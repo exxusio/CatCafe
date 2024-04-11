@@ -14,30 +14,14 @@ namespace BusinessLayer.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<Tables>> GetAll(bool includeReservations = false, bool includeOrders = false)
+        public async Task<IEnumerable<Tables>> GetAll()
         {
-            IQueryable<Tables> query = _context.tables;
-
-            if (includeReservations)
-                query = query.Include(t => t.reservationTables);
-
-            if (includeOrders)
-                query = query.Include(t => t.orders);
-
-            return await query.ToListAsync();
+            return await _context.tables.ToListAsync();
         }
 
-        public async Task<Tables> GetById(int ID, bool includeReservation = false, bool includeOrder = false)
+        public async Task<Tables> GetById(int ID)
         {
-            IQueryable<Tables> query = _context.tables.Where(t => t.ID == ID);
-
-            if (includeReservation)
-                query = query.Include(t => t.reservationTables);
-
-            if (includeOrder)
-                query = query.Include(t => t.orders);
-
-            return await query.FirstOrDefaultAsync();
+            return await _context.tables.Where(t => t.ID == ID).FirstOrDefaultAsync();
         }
 
         public async Task Save(Tables table)

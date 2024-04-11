@@ -4,8 +4,8 @@ namespace BusinessLayer.Interfaces
 {
     public interface IVisitorsRepository
     {
-        Task<IEnumerable<Visitors>> GetAll(bool includeAccounts = false, bool includeReviews = false, bool includeOrders = false);
-        Task<Visitors> GetById(int ID, bool includeAccount = false, bool includeReviews = false, bool includeOrders = false);
+        Task<IEnumerable<Visitors>> GetAll(bool includeOrders = false, bool includeReservations = false);
+        Task<Visitors> GetById(int ID, bool includeOrder = false, bool includeReservation = false);
         Task Save(Visitors visitor);
         Task Delete(Visitors visitor);
     }

@@ -1,10 +1,11 @@
 .vs/
-PresentationAccessLayer/bin/
-PresentationAccessLayer/obj/
-BusinessAccessLayer/bin/
-BusinessAccessLayer/obj/
-BusinessAccessLayer/bin/
-BusinessAccessLayer/obj/
+.gitignore
+PresentationLayer/bin/
+PresentationLayer/obj/
+DataAccessLayer/bin/
+DataAccessLayer/obj/
+BusinessLayer/bin/
+BusinessLayer/obj/
 Web/bin/
 Web/obj/
 Web/wwwroot/json-test/

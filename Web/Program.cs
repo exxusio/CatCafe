@@ -59,14 +59,19 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "catcafe",
+    name: "Main",
     pattern: "{action}/{id?}",
-    defaults: new { controller = "catcafe", action = "main" });
+    defaults: new { controller = "Main", action = "main" });
 
 app.MapControllerRoute(
-    name: "authentication",
+    name: "Authentication",
     pattern: "{action}/{id?}",
-    defaults: new { controller = "authentication", action = "login" });
+    defaults: new { controller = "Authentication", action = "login" });
+
+app.MapControllerRoute(
+    name: "AdminPanel",
+    pattern: "{controller}/{action}/{id?}",
+    defaults: new { controller = "AdminPanel" });
 
 app.MapGet("/main", () => { return Results.Redirect("/"); });
 

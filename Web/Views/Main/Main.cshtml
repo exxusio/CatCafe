@@ -1,4 +1,4 @@
-﻿@model List<DataAccessLayer.Entities.Products>
+﻿@model List<PresentationLayer.Models.ViewProducts>
 
 @{
     ViewData["Title"] = "";
@@ -224,7 +224,6 @@
 </section>
 
 
-
 <div class="page">
     <main class="panel" data-type="main">
         @foreach (var productType in Model.Select(p => p.type.name).Distinct())
@@ -232,20 +231,20 @@
             <section class="group-panel" id="@productType.ToLower()">
                 <h2 class="panel-title">@productType</h2>
 
-                @foreach (var product in Model.Where(p => p.type.name == productType))
+                @foreach (var products in Model.Where(ps => ps.type.name == productType))
                 {
                     <article class="group-item">
                         <main class="item" data-type="main">
                             <picture class="item-picture" data-type="main">
-                                <img src="./content/image/pepperoni.png" alt="">
+                                <img src="data:image.jpg;base64,@Convert.ToBase64String(products.photography)" alt="">
                             </picture>
                             <div class="item-title">
-                                <a href="" class="item-name">@product.name</a>
+                                <a href="" class="item-name">@products.name</a>
                             </div>
-                            @product.description
+                            @products.description
                         </main>
                         <footer class="item-footer">
-                            <div class="item-price">@product.price руб.</div>
+                            <div class="item-price">@products.price руб.</div>
                             <button class="buy-item" type="button" data-type="select" data-size="medium">Выбрать</button>
                         </footer>
                     </article>

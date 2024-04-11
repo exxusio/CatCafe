@@ -27,14 +27,14 @@
                 <a class="item" data-type="info" asp-area="" asp-action="reviews">Отзывы</a>
 
                 @* @if (User.IsInRole("Admin"))
-                {
+                { *@
                     <a class="item" data-type="info" asp-area="" asp-action="admin">Администрирование</a>
-                } *@
+                @* } *@ 
             </div>
         </div>
         <header class="header">
             <div class="left">
-                <a href="./index.html" class="container" data-type="header">
+                <a class="container" data-type="header" asp-area="" asp-action="main">
                     <div class="header-primary-item">
                         <img src="~/content/logo.svg" alt="">
                         <div>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="#" class="container" data-type="header" id="reservation">
+                <a class="container" data-type="header" id="reservation" style="cursor:pointer;">
                     <div class="header-secondary-item">
                         <div>
                             <div class="mini-name">Бронирование</div>

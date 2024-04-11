@@ -14,28 +14,22 @@ namespace BusinessLayer.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<Cats>> GetAll(bool includeBreeds = false, bool includeReservations = false)
+        public async Task<IEnumerable<Cats>> GetAll(bool includeBreeds = false)
         {
             IQueryable<Cats> query = _context.cats;
 
             if (includeBreeds)
                 query = query.Include(t => t.breed);
 
-            if (includeReservations)
-                query = query.Include(t => t.reservationCats);
-
             return await query.ToListAsync();
         }
 
-        public async Task<Cats> GetById(int ID, bool includeBreed = false, bool includeReservation = false)
+        public async Task<Cats> GetById(int ID, bool includeBreed = false)
         {
             IQueryable<Cats> query = _context.cats.Where(t => t.ID == ID);
 
             if (includeBreed)
                 query = query.Include(t => t.breed);
-
-            if (includeReservation)
-                query = query.Include(t => t.reservationCats);
 
             return await query.FirstOrDefaultAsync();
         }
