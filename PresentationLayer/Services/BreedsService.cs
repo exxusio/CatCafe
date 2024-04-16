@@ -36,16 +36,20 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditBreeds> GetEditById(int ID)
+        public async Task<EditBreeds?> GetEditById(int ID)
         {
             var breed = await _dataManager.breeds.GetById(ID);
 
-            return new EditBreeds()
+            if (breed != null)
             {
-                ID = breed.ID,
-                name = breed.name,
-                description = breed.description
-            };
+                return new EditBreeds()
+                {
+                    ID = breed.ID,
+                    name = breed.name,
+                    description = breed.description
+                };
+            }
+            return null;
         }
 
         public async Task<ViewBreeds> SaveEdit(EditBreeds editBreed)

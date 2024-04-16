@@ -2,7 +2,9 @@ using BusinessLayer;
 using BusinessLayer.Implementations;
 using BusinessLayer.Interfaces;
 using DataAccessLayer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PresentationLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,17 +14,23 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseSqlServer(connectionString);
 });
 
+//builder.Services.AddSession();
+
 AddTransient();
 
+
+//======
 //builder.Services.AddDefaultIdentity<IdentityUser>(options
 //    => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<CatCafeContext>();
+//    .AddEntityFrameworkStores<DataBaseContext>();
 
 //builder.Services.ConfigureApplicationCookie(options =>
 //{
 //    options.LoginPath = "/login";
 //    options.ReturnUrlParameter = "ReturnUrl";
 //});
+//======
+
 
 builder.Services.AddControllersWithViews();
 
@@ -75,7 +83,11 @@ app.MapControllerRoute(
 
 app.MapGet("/main", () => { return Results.Redirect("/"); });
 
+
+//======
 //app.MapRazorPages();
+//======
+
 
 app.Run();
 
@@ -109,4 +121,7 @@ void AddTransient()
     builder.Services.AddTransient<IEventsRepository, EventsRepository>();
 
     builder.Services.AddScoped<DataManager>();
+
+
+    builder.Services.AddScoped<ServicesManager>();
 }

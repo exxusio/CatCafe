@@ -4,6 +4,8 @@
     {
         public int ID { get; set; }
 
+        public ViewVisitors visitor { get; set; } = null!;
+
         public string? text { get; set; }
 
         public DateOnly date { get; set; }
@@ -11,8 +13,6 @@
         public TimeOnly time { get; set; }
 
         public int rating { get; set; }
-
-        public virtual ViewVisitors visitor { get; set; } = null!;
     }
 
     public class EditReviews

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<PresentationLayer.Models.ViewReviews>
+
+@{
     ViewData["Title"] = " | Отзывы";
 }
 
@@ -13,11 +15,12 @@
     <section class="panel">
         <h1 class="panel-title">Здесь вы можете оставить своё мнение о нас и нашем персонале!</h1><br><br>
 
-
+        @foreach (var review in Model.OrderByDescending(review => review.date).ThenByDescending(review => review.time))
+        {
         <article class="reviews-item">
             <main class="item" data-type="review">
                 <div class="review-info">
-                    <div class="rating" data-value="3">
+                    <div class="rating" data-value="@review.rating">
                         <input type="radio" disabled><label></label>
                         <input type="radio" disabled><label></label>
                         <input type="radio" disabled><label></label>
@@ -25,20 +28,20 @@
                         <input type="radio" disabled><label></label>
                     </div>
                     <div class="review-author">
-                        <div class="review-name">Владислав</div>
-                        <div class="review-surname">Якушев</div>
+                        <div class="review-name">@review.visitor.name</div>
+                        <div class="review-surname">@review.visitor.surname</div>
                     </div>
                     <div class="date-time">
-                        <div class="review-time">18:30</div>
-                        <div class="review-date">02.03.2024</div>
+                        <div class="review-time">@review.time</div>
+                        <div class="review-date">@review.date</div>
                     </div>
                 </div>
             </main>
             <footer class="review-text">
-                <h2>Кафе крутое! Еда вкуская! Котики милые!</h2>
+                <h2>@review.text</h2>
             </footer>
         </article>
-
+        }
 
     </section>
 </main>

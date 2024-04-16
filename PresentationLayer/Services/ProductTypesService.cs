@@ -35,15 +35,19 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditProductTypes> GetEditById(int ID)
+        public async Task<EditProductTypes?> GetEditById(int ID)
         {
             var type = await _dataManager.productTypes.GetById(ID);
 
-            return new EditProductTypes()
+            if (type != null)
             {
-                ID = type.ID,
-                name = type.name
-            };
+                return new EditProductTypes()
+                {
+                    ID = type.ID,
+                    name = type.name
+                };
+            }
+            return null;
         }
 
         public async Task<ViewProductTypes> SaveEdit(EditProductTypes editType)

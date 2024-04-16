@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@inject PresentationLayer.ServicesManager _servicesManager
+
+@{
+    var types = (await _servicesManager.products.GetList())
+    .Select(p => p.type)
+    .GroupBy(pt => pt.name)
+    .OrderBy(g => g.Key != "Пицца")
+    .ThenBy(g => g.Key)
+    .Select(g => g.First())
+    .ToList();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,6 +44,8 @@
                 @* } *@ 
             </div>
         </div>
+
+
         <header class="header">
             <div class="left">
                 <a class="container" data-type="header" asp-area="" asp-action="main">
@@ -64,26 +78,28 @@
                 <button class="button" type="button" data-type="auth" data-size="small">Выйти</button>
             </div>
         </header>
+
+
         <nav class="nav">
             <div class="panel" data-type="nav">
                 <div class="logo">
-                    <img src="./content/logo.svg" alt="">
+                    <a asp-area="" asp-action="main"><img src="./content/logo.svg" alt=""></a>
                 </div>
                 <nav class="list">
                     <div class="nav-list">
-                        <div class="list-item">
-                            <a href="#pizza" class="item" data-type="nav">Пицца</a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#" class="item" data-type="nav">Напитки</a>
-                        </div>
-                        <div class="list-item">
-                            <a href="#" class="item" data-type="nav">Закуски</a>
-                        </div>
+                        @foreach (var type in types)
+                        {
+                            <div class="list-item">
+                                <a href="#@type.name.ToLower()" class="item" data-type="nav">@type.name</a>
+                            </div>
+                        }
                     </div>
                 </nav>
                 <div class="basket">
-                    <form class="search" action="#">
+
+                    <div id="search-filter-panel" style="display: flex;">
+
+                        <div class="search">
                         <input id="search-box" type="text" class="search-box">
                         <div>
                             <span class="search-icon">
@@ -95,8 +111,10 @@
                         </div>
                         <div class="notification">!</div>
                         <input type="submit" id="search-submit">
-                    </form>
-                    <button class="filter">
+                    </div>
+
+
+                        <button class="filter">
                         <div class="filter-box"></div>
                         <div>
                             <span class="filter-icon">
@@ -109,7 +127,9 @@
                         </div>
                         <div class="notification" style="right: 222px;">!</div>
                     </button>
-                    <div class="filter-panel" style="opacity: 0;">
+
+
+                        <div class="filter-panel" style="opacity: 0;">
                         <ul class="filter-list">
                             <li class="filter-list-item">
                                 <h4 class="filter-text">Сначала дешевые</h4>
@@ -143,6 +163,9 @@
                             </div>
                         </div>
                     </div>
+                    
+                    </div>
+
                     <button class="history" id="buttonHistory">
                         <div class="history-box"></div>
                         <div>
@@ -154,10 +177,14 @@
                             </span>
                         </div>
                     </button>
+
+
                     <button class="button" data-type="primary" data-types="nav" data-size="medium" type="button">Корзина</button>
                 </div>
             </div>
         </nav>
+
+
         <div class="basket-window" style="z-index: 1000; position: relative;">
         </div>
         <div class="reservation-window" style="z-index: 1000; position: relative;">
@@ -170,7 +197,6 @@
 
 
     @RenderBody()
-
 
     <script src="~/js/nav-panel.js"></script>
     <script src="~/js/basket-panel.js"></script>

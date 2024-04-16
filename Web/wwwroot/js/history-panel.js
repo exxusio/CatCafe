@@ -7,114 +7,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
         reviewsContainer.innerHTML = `
         <div class="background" style="opacity: 0;"></div>
-            <div class="object" data-type="mobile">
-                <div class="frame">
-                    <div class="window" data-type="history">
-                        <button class="close" data-type="history">
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" fill="#fff" d="M9.61 12.199L.54 3.129A1.833 1.833 0 113.13.536l9.07 9.07L21.27.54a1.833 1.833 0 012.592 2.592l-9.068 9.068 9.07 9.07a1.833 1.833 0 01-2.59 2.592l-9.072-9.07-9.073 9.073a1.833 1.833 0 01-2.591-2.592L9.61 12.2z"></path>
-                            </svg>
-                        </button>
-                        <div class="info">
-                            <div class="title">История заказов</div>
-                        </div>
-                        <div>
-                            <div class="form">
-                                <div class="container">
-                                    <div class="history-list">
-                                                
-                                        <article class="history-item">
-                                            <main class="item" data-type="history">
-                                                <div class="history-item-block">
-                                                    <span class="label">№50</span>
-                                                    <div class="history-text">20 марта 2024г. в 14:35</div>
-                                                </div>
-                                                <div class="history-item-block">
-                                                    <span class="label">Состав</span>
-
-
-
-
-                                                    <div class="history-container">
-                                                        <div class="history-list-items">
-                                                            
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                                            <article class="history-list-item">
-                                                                <div class="item-picture" data-type="history">
-                                                                    <img src="./content/image/pepperoni.png" alt="">
-                                                                </div>
-                                                                <span class="history-item-info">Пепперони</span>
-                                                            </article>
-                                        
-                                                        </div>
-                                                    </div>
-
-
-
-
-                                                </div>
-                                                <div class="history-item-block">
-                                                    <span class="label">Сумма</span>
-                                                    <div class="history-text">28,08 руб.</div>
-                                                </div>
-                                                <footer class="buttons">
-                                                    <button class="button" type="button" data-type="primary" data-size="medium">Повторить заказ</button>
-                                                </footer>
-                                            </main>
-                                        </article>
-                            
-                                    </div>
-                                </div>
-                            </div>
-
+<div class="object" data-type="mobile">
+    <div class="frame">
+        <div class="window" data-type="history">
+            <button class="close" data-type="history">
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" fill="#fff" d="M9.61 12.199L.54 3.129A1.833 1.833 0 113.13.536l9.07 9.07L21.27.54a1.833 1.833 0 012.592 2.592l-9.068 9.068 9.07 9.07a1.833 1.833 0 01-2.59 2.592l-9.072-9.07-9.073 9.073a1.833 1.833 0 01-2.591-2.592L9.61 12.2z"></path>
+                </svg>
+            </button>
+            <div class="info">
+                <div class="title">История заказов</div>
+            </div>
+            <div>
+                <div class="form">
+                    <div class="container">
+                        <div class="history-list">
                         </div>
                     </div>
                 </div>
+
             </div>
+        </div>
+    </div>
+</div>
         `;
 
         reviewsPanel.appendChild(reviewsContainer);
+
+
+
+        fetch(`/VisitorOrders`, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                ViewVisitorOrders(data);
+            });
+
 
         setTimeout(() => {
             const reviewsPanel = reviewsContainer.querySelector('.object[data-type="mobile"]');
@@ -153,3 +82,122 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
+function ViewVisitorOrders(orders) {
+    const historyList = document.querySelector('.history-list');
+
+    if (!historyList) return;
+
+    historyList.innerHTML = '';
+
+    orders.forEach(order => {
+        const historyItem = document.createElement('article');
+        historyItem.className = 'history-item';
+
+
+        const main = document.createElement('main');
+        main.className = 'item';
+        main.setAttribute('data-type', 'history');
+
+
+        const historyItemBlock1 = document.createElement('div');
+        historyItemBlock1.className = 'history-item-block';
+        const numberOrder = document.createElement('span');
+        numberOrder.className = 'label';
+        numberOrder.textContent = `№${order.id}`;
+        const historyDate = document.createElement('div');
+        historyDate.className = 'history-text';
+
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString('ru-RU', options);
+        };
+
+        historyDate.textContent = formatDate(`${order.date}T${order.time}`);
+
+
+        historyItemBlock1.appendChild(numberOrder);
+        historyItemBlock1.appendChild(historyDate);
+
+
+
+        const historyItemBlock2 = document.createElement('div');
+        historyItemBlock2.className = 'history-item-block';
+        historyItemBlock2.innerHTML = `
+        <span class="label">Состав</span>
+            <div class="history-container">
+                <div class="history-list-items">
+                </div>
+            </div>
+        `;
+
+        const historyListItems = historyItemBlock2.querySelector('.history-list-items');
+        order.contents.forEach(content => {
+            const historyListItem = document.createElement('article');
+            historyListItem.className = 'history-list-item';
+
+
+            const itemPicture = document.createElement('div');
+            itemPicture.className = 'item-picture';
+            itemPicture.setAttribute('data-type', 'history');
+
+
+            const img = document.createElement('img');
+            img.src = 'data:image.jpg;base64,' + content.product.photography;
+            img.alt = '';
+
+
+            const itemInfo = document.createElement('span');
+            itemInfo.className = 'history-item-info';
+            itemInfo.textContent = `${content.product.name}`;
+
+            itemPicture.appendChild(img);
+            historyListItem.appendChild(itemPicture);
+            historyListItem.appendChild(itemInfo);
+            historyListItems.appendChild(historyListItem);
+        });
+
+
+
+        const historyItemBlock3 = document.createElement('div');
+        historyItemBlock3.className = 'history-item-block';
+        const summ = document.createElement('span');
+        summ.className = 'label';
+        summ.textContent = `Сумма`;
+        const summNumber = document.createElement('div');
+        summNumber.className = 'history-text';
+        summNumber.textContent = `${sumOrder(order)} руб.`;
+
+        historyItemBlock3.appendChild(summ);
+        historyItemBlock3.appendChild(summNumber);
+
+
+
+        const footer = document.createElement('footer');
+        footer.className = 'buttons';
+        footer.innerHTML = `
+        <button class="button" type="button" data-type="primary" data-size="medium">Повторить заказ</button>
+        `;
+
+
+        main.appendChild(historyItemBlock1);
+        main.appendChild(historyItemBlock2);
+        main.appendChild(historyItemBlock3);
+        main.appendChild(footer);
+        historyItem.appendChild(main);
+        historyList.appendChild(historyItem);
+    });
+}
+
+function sumOrder(order) {
+    let price = 0;
+
+    order.contents.forEach(content => {
+        price += content.product.price;
+    });
+
+    console.log(price);
+    return price;
+}

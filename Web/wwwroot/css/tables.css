@@ -80,6 +80,11 @@
     border-width: 7px;
 }
 
+.table-checkbox:disabled + .table[data-type="table"]::after {
+    border-color: rgb(218, 108, 108);
+    border-width: 7px;
+}
+
 .table-title {
     color: rgba(0,0,0,1);
     position: absolute;

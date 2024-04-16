@@ -35,15 +35,19 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditPositions> GetEditById(int ID)
+        public async Task<EditPositions?> GetEditById(int ID)
         {
             var position = await _dataManager.positions.GetById(ID);
 
-            return new EditPositions()
+            if (position != null)
             {
-                ID = position.ID,
-                description = position.description
-            };
+                return new EditPositions()
+                {
+                    ID = position.ID,
+                    description = position.description
+                };
+            }
+            return null;
         }
 
         public async Task<ViewPositions> SaveEdit(EditPositions editPosition)

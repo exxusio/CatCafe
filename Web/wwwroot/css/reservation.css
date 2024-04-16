@@ -137,3 +137,13 @@
 .info-icon:hover::before {
     display: block;
 }
+
+
+.cats-checkbox {
+    display: none;
+}
+
+.cats-checkbox:checked + .cats-item {
+    background: rgb(233, 233, 233);
+    border-width: 7px;
+}

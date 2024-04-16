@@ -68,6 +68,7 @@
     align-items: center;
     transform: translateX(-52px);
     transition: transform 0.25s ease 0s;
+    pointer-events: none;
 }
 
 .nav-list {
@@ -83,6 +84,7 @@
     display: inline-block;
     vertical-align: middle;
     transition: transform 0.25s ease;
+    pointer-events: auto;
 }
 
 .nav-list.shifted {

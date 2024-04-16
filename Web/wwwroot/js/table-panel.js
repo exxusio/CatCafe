@@ -1,11 +1,13 @@
+let reservationTablesContainer;
+
 function AddTable() {
     const reservationButton = document.getElementById('reservation-table');
     const reservationPanel = document.querySelector('.reservation-table');
 
-    reservationButton.addEventListener('click', function() {
-        const reservationContainer = document.createElement('div');
+    reservationButton.addEventListener('click', function () {
+        /*const*/ reservationTablesContainer = document.createElement('div');
 
-        reservationContainer.innerHTML = `
+        reservationTablesContainer.innerHTML = `
         <div class="object" data-type="mobile">
                 <div class="frame">
                     <div class="window" data-type="table">
@@ -36,120 +38,7 @@ function AddTable() {
                                     </div>
                                 </div>
                                 <div class="table-in">
-                                    <div class="table-left">
-                                        <div class="table-A">
-                                            <div class="A-1">
-                                                <input class="table-checkbox" type="checkbox" id="A-1" data-type="table">
-                                                <label class="table" for="A-1" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-2">
-                                                <input class="table-checkbox" type="checkbox" id="A-2" data-type="table">
-                                                <label class="table" for="A-2" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-3">
-                                                <input class="table-checkbox" type="checkbox" id="A-3" data-type="table">
-                                                <label class="table" for="A-3" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-4">
-                                                <input class="table-checkbox" type="checkbox" id="A-4" data-type="table">
-                                                <label class="table" for="A-4" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-5">
-                                                <input class="table-checkbox" type="checkbox" id="A-5" data-type="table">
-                                                <label class="table" for="A-5" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-6">
-                                                <input class="table-checkbox" type="checkbox" id="A-6" data-type="table">
-                                                <label class="table" for="A-6" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-7">
-                                                <input class="table-checkbox" type="checkbox" id="A-7" data-type="table">
-                                                <label class="table" for="A-7" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-8">
-                                                <input class="table-checkbox" type="checkbox" id="A-8" data-type="table">
-                                                <label class="table" for="A-8" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="A-9">
-                                                <input class="table-checkbox" type="checkbox" id="A-9" data-type="table">
-                                                <label class="table" for="A-9" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="table-right">
-                                        <div class="table-B">
-                                            <div class="B-1">
-                                                <input class="table-checkbox" type="checkbox" id="B-1" data-type="table">
-                                                <label class="table" for="B-1" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="B-2">
-                                                <input class="table-checkbox" type="checkbox" id="B-2" data-type="table">
-                                                <label class="table" for="B-2" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="table-C">
-                                            <div class="C-1">
-                                                <input class="table-checkbox" type="checkbox" id="C-1" data-type="table">
-                                                <label class="table" for="C-1" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="C-2">
-                                                <input class="table-checkbox" type="checkbox" id="C-2" data-type="table">
-                                                <label class="table" for="C-2" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="C-3">
-                                                <input class="table-checkbox" type="checkbox" id="C-3" data-type="table">
-                                                <label class="table" for="C-3" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="table-D">
-                                            <div class="D-1">
-                                                <input class="table-checkbox" type="checkbox" id="D-1" data-type="table">
-                                                <label class="table" for="D-1" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="D-2">
-                                                <input class="table-checkbox" type="checkbox" id="D-2" data-type="table">
-                                                <label class="table" for="D-2" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                            <div class="D-3">
-                                                <input class="table-checkbox" type="checkbox" id="D-3" data-type="table">
-                                                <label class="table" for="D-3" data-type="table">
-                                                    <span class="table-title">text</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -161,40 +50,229 @@ function AddTable() {
             </div>
         `;
 
-        reservationPanel.appendChild(reservationContainer);
+        reservationPanel.appendChild(reservationTablesContainer);
+
+
+
+        const monthSelect = document.querySelector('.input.month');
+        const daySelect = document.querySelector('.input.day');
+
+
+        const selectElement = document.getElementById('booking-time');
+
+        const formData = new FormData();
+
+        formData.append('month', monthSelect.value);
+        formData.append('day', daySelect.value);
+        formData.append('time', selectElement.value);
+
+        fetch(`/CheckTables`, {
+            method: 'PUT',
+            body: formData
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                CreateCafeTable(data);
+            });
+
+
+
 
         setTimeout(() => {
-            const reservationPanel = reservationContainer.querySelector('.object[data-type="mobile"]');
+            const reservationPanel = reservationTablesContainer.querySelector('.object[data-type="mobile"]');
             reservationPanel.style.transition = 'transform 300ms ease-out';
             reservationPanel.style.transform = 'translateY(0px)';
         }, 100);
-        
-        const reservationCloseButton = reservationContainer.querySelector('.close');
+
+        const reservationCloseButton = reservationTablesContainer.querySelector('.close');
         reservationCloseButton.addEventListener('click', closereservation);
 
-        function closereservation() {
-            const reservationPanel = reservationContainer.querySelector('.object[data-type="mobile"]');
-            reservationPanel.style.transform = 'translateY(-100%)';
-        
-            setTimeout(() => {
-                reservationContainer.remove();
-            }, 300);
+        //function closereservation() {
+        //    const reservationPanel = reservationContainer.querySelector('.object[data-type="mobile"]');
+        //    reservationPanel.style.transform = 'translateY(-100%)';
+
+        //    setTimeout(() => {
+        //        reservationContainer.remove();
+        //    }, 300);
+        //}
+
+
+        AcceptSelectTable(reservationTablesContainer);
+    });
+}
+
+function closereservation() {
+    const reservationPanel = reservationTablesContainer.querySelector('.object[data-type="mobile"]');
+    reservationPanel.style.transform = 'translateY(-100%)';
+
+    setTimeout(() => {
+        reservationTablesContainer.remove();
+    }, 300);
+}
+
+
+
+function CreateCafeTable(tables) {
+    var tableIn = document.querySelector('.table-in');
+    var tableLeft;
+    var tableRight;
+
+    var blockA;
+    var blockB;
+    var blockC;
+    var blockD;
+
+    var tableINT = 1;
+
+    tables.forEach(table => {
+        if (tableINT === 1) {
+            tableLeft = document.createElement('div');
+            tableLeft.className = 'table-left';
+            blockA = document.createElement('div');
+            blockA.className = 'table-A';
+        }
+        else if (tableINT === 10) {
+            tableRight = document.createElement('div');
+            tableRight.className = 'table-right';
+            blockB = document.createElement('div');
+            blockB.className = 'table-B';
+        }
+        else if (tableINT === 12) {
+            blockC = document.createElement('div');
+            blockC.className = 'table-C';
+        }
+        else if (tableINT === 15) {
+            blockD = document.createElement('div');
+            blockD.className = 'table-D';
         }
 
 
-        function limitCheckboxSelection() {
-            var checkboxes = document.querySelectorAll('.table-checkbox:checked');
-            var maxAllowed = 3;
-        
-            if (checkboxes.length > maxAllowed) {
-                this.checked = false;
+        if (tableINT >= 1 && tableINT < 10) {
+            blockA.innerHTML += `
+            <div class="A-${tableINT}">
+                <input class="table-checkbox" type="checkbox" id="A-${table.id}" data-type="table">
+                <label class="table" for="A-${table.id}" data-type="table">
+                    <span class="table-title">${table.capacity} чел.</span>
+                </label>
+            </div>
+            `;
+            if (!table.availability) {
+                const input = blockA.querySelector(`#A-${table.id}`);
+                input.disabled = true;
             }
         }
-        
-        var checkboxes = document.querySelectorAll('.table-checkbox');
-        
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', limitCheckboxSelection);
+        else if (tableINT >= 10 && tableINT < 12) {
+            blockB.innerHTML += `
+            <div class="B-${tableINT - 9}">
+                <input class="table-checkbox" type="checkbox" id="B-${table.id}" data-type="table">
+                <label class="table" for="B-${table.id}" data-type="table">
+                    <span class="table-title">${table.capacity} чел.</span>
+                </label>
+            </div>
+            `;
+            if (!table.availability) {
+                const input = blockB.querySelector(`#B-${table.id}`);
+                input.disabled = true;
+            }
+        }
+        else if (tableINT >= 12 && tableINT < 15) {
+            blockC.innerHTML += `
+            <div class="C-${tableINT - 11}">
+                <input class="table-checkbox" type="checkbox" id="C-${table.id}" data-type="table">
+                <label class="table" for="C-${table.id}" data-type="table">
+                    <span class="table-title">${table.capacity} чел.</span>
+                </label>
+            </div>
+            `;
+            if (!table.availability) {
+                const input = blockC.querySelector(`#C-${table.id}`);
+                input.disabled = true;
+            }
+        }
+        else if (tableINT >= 15 && tableINT < 18) {
+            blockD.innerHTML += `
+            <div class="D-${tableINT - 14}">
+                <input class="table-checkbox" type="checkbox" id="D-${table.id}" data-type="table">
+                <label class="table" for="D-${table.id}" data-type="table">
+                    <span class="table-title">${table.capacity} чел.</span>
+                </label>
+            </div>
+            `;
+            if (!table.availability) {
+                const input = blockD.querySelector(`#D-${table.id}`);
+                input.disabled = true;
+            }
+        }
+        if (tableINT > 18) {
+            return;
+        }
+        tableINT += 1;
+    });
+
+
+    if (blockA !== undefined) {
+        tableLeft.appendChild(blockA);
+    }
+    if (blockB !== undefined) {
+        tableRight.appendChild(blockB);
+    }
+    if (blockC !== undefined) {
+        tableRight.appendChild(blockC);
+    }
+    if (blockD !== undefined) {
+        tableRight.appendChild(blockD);
+    }
+    if (tableLeft !== undefined) {
+        tableIn.appendChild(tableLeft);
+    }
+    if (tableRight !== undefined) {
+        tableIn.appendChild(tableRight);
+    }
+
+    function limitCheckboxSelection() {
+        var checkboxes = document.querySelectorAll('.table-checkbox:checked');
+        var maxAllowed = 3;
+
+        if (checkboxes.length > maxAllowed) {
+            this.checked = false;
+        }
+    }
+
+    var checkboxes = document.querySelectorAll('.table-checkbox');
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', limitCheckboxSelection);
+    });
+}
+
+
+
+
+function AcceptSelectTable() {
+    const windowTable = document.querySelector('.window[data-type="table"]');
+    const confirmButton = windowTable.querySelector('.button[data-type="primary"]');
+
+    confirmButton.addEventListener('click', function () {
+        const checkboxes = document.querySelectorAll('.table-checkbox');
+
+        const selectedIds = [];
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const idNumber = parseInt(checkbox.id.split('-')[1]);
+                selectedIds.push(idNumber);
+            }
         });
+
+        if (selectedIds.length !== 0) {
+            const tableButton = document.getElementById('reservation-table');
+            tableButton.textContent = '';
+            selectedIds.forEach(item => {
+                tableButton.textContent += item + ", ";
+            })
+            tableButton.textContent = (tableButton.textContent).substring(0, (tableButton.textContent).length - 2);
+            closereservation();
+        }
     });
 }

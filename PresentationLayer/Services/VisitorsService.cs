@@ -54,19 +54,23 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditVisitors> GetEditById(int ID = 0)
+        public async Task<EditVisitors?> GetEditById(int ID = 0)
         {
             var visitor = await _dataManager.visitors.GetById(ID);
 
-            return new EditVisitors()
+            if (visitor != null)
             {
-                ID = visitor.ID,
-                name = visitor.name,
-                surname = visitor.surname,
-                phoneNumber = visitor.phoneNumber,
-                emailAddress = visitor.emailAddress,
-                dateOfBirth = visitor.dateOfBirth
-            };
+                return new EditVisitors()
+                {
+                    ID = visitor.ID,
+                    name = visitor.name,
+                    surname = visitor.surname,
+                    phoneNumber = visitor.phoneNumber,
+                    emailAddress = visitor.emailAddress,
+                    dateOfBirth = visitor.dateOfBirth
+                };
+            }
+            return null;
         }
 
         public async Task<ViewVisitors> SaveEdit(EditVisitors editVisitor)

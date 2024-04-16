@@ -51,17 +51,21 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditReservations> GetEditById(int ID = 0)
+        public async Task<EditReservations?> GetEditById(int ID = 0)
         {
             var reservation = await _dataManager.reservations.GetById(ID);
 
-            return new EditReservations()
+            if (reservation != null)
             {
-                ID = reservation.ID,
-                visitorID = reservation.visitorID,
-                date = reservation.date,
-                time = reservation.time
-            };
+                return new EditReservations()
+                {
+                    ID = reservation.ID,
+                    visitorID = reservation.visitorID,
+                    date = reservation.date,
+                    time = reservation.time
+                };
+            }
+            return null;
         }
 
         public async Task<ViewReservations> SaveEdit(EditReservations editReservation)

@@ -71,7 +71,7 @@ namespace PresentationLayer
         public BreedsService breeds { get { return _breedsService; } }
 
         public ReservationsService reservations { get {  return _reservationsService; } }
-        public ReservationCatsService reservationsCats {  get { return _reservationCatsService; } }
+        public ReservationCatsService reservationCats {  get { return _reservationCatsService; } }
         public ReservationTablesService reservationTables { get { return _reservationTablesService; } }
 
         public EmployeesService employees { get {  return _employeesService; } }

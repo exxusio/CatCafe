@@ -42,17 +42,21 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditContents> GetEditById(int ID = 0)
+        public async Task<EditContents?> GetEditById(int ID = 0)
         {
-            var product = await _dataManager.contents.GetById(ID);
+            var content = await _dataManager.contents.GetById(ID);
 
-            return new EditContents()
+            if (content != null)
             {
-                ID = product.ID,
-                orderID = product.orderID,
-                productID = product.productID,
-                quantity = product.quantity
-            };
+                return new EditContents()
+                {
+                    ID = content.ID,
+                    orderID = content.orderID,
+                    productID = content.productID,
+                    quantity = content.quantity
+                };
+            }
+            return null;
         }
 
         public async Task<ViewContents> SaveEdit(EditContents editContent)

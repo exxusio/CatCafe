@@ -1,4 +1,4 @@
-﻿@model List<PresentationLayer.Models.ViewProducts>
+﻿@model Web.Models.MainPageModel
 
 @{
     ViewData["Title"] = "";
@@ -12,6 +12,8 @@
 @section Scripts {
     <script src="~/js/popular-list.js"></script>
     <script src="~/js/events-panel.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
+    <script src="~/js/main-panel.js"></script>
 }
 
 <div class="panel" data-type="events">
@@ -20,99 +22,21 @@
             <div class="events-list" style="transform: translate3d(0px, 0px, 0px)">
 
 
+                @foreach (var _event in Model.Events)
+                {
+                    <div class="events-item">
+                        <div class="events-slide">
+                            <div class="events-slide-image">
+                                <img src="data:image.jpg;base64,@Convert.ToBase64String(_event.photography)" alt="" class="events-image">
 
-                <div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
+                                <div class="events-slide-text">
+                                    <div class="events-title">@_event.name</div>
+                                    <div class="events-text" style="display:none;">@_event.date<br>@_event.time<br><br>@_event.description</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div><div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div><div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div><div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div><div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div><div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div><div class="events-item">
-                    <div class="events-slide">
-                        <div class="events-slide-image">
-                            <img src="./content/image/test.jpg" alt="" class="events-image">
-
-                            <div class="events-slide-text">
-                                <div class="events-title">Акция<br>весны</div>
-                                <div class="events-text" style="display:none;">22.03.2024<br><br>В этот день все пиццы будут со скидкой в 20%! Успей купить пока акция не закончится!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
 
 
             </div>
@@ -136,75 +60,20 @@
     <h2 class="popular-title">Часто заказывают</h2>
     <div class="popular-container">
         <div class="popular-list slider" style="transform: translate3d(0px, 0px, 0px)">
-            <article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article>
-
-
-            <article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони1</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article><article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони2</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article><article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони3</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article><article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони4</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article>
-            </article><article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони5</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article><article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони6</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article><article class="popular-item">
-                <div class="popular-picture">
-                    <img src="./content/image/pepperoni.png" alt="">
-                </div>
-                <div class="popular-info">
-                    <h2 class="popular-name">Пепперони7</h2>
-                    <div class="popular-price">13,99 руб.</div>
-                </div>
-            </article>
+            
+            
+            @foreach (var product in Model.PopularProducts)
+            {
+                <article class="popular-item" name="@product.ID">
+                    <div class="popular-picture">
+                        <img src="data:image.jpg;base64,@Convert.ToBase64String(product.photography)" alt="">
+                    </div>
+                    <div class="popular-info">
+                        <h2 class="popular-name">@product.name</h2>
+                        <div class="popular-price">@product.price руб.</div>
+                    </div>
+                </article>
+            }
 
 
         </div>
@@ -224,27 +93,33 @@
 </section>
 
 
-<div class="page">
-    <main class="panel" data-type="main">
-        @foreach (var productType in Model.Select(p => p.type.name).Distinct())
-        {
-            <section class="group-panel" id="@productType.ToLower()">
-                <h2 class="panel-title">@productType</h2>
 
-                @foreach (var products in Model.Where(ps => ps.type.name == productType))
+<div class="page">
+    
+</div>
+
+
+@* <div class="page">
+    <main class="panel" data-type="main">
+        @foreach (var type in Model.Products.Select(p => p.type.name).Distinct())
+        {
+            <section class="group-panel" id="@type.ToLower()">
+                <h2 class="panel-title">@type</h2>
+
+                @foreach (var product in Model.Products.Where(ps => ps.type.name == type))
                 {
-                    <article class="group-item">
+                    <article class="group-item" name="@product.ID">
                         <main class="item" data-type="main">
                             <picture class="item-picture" data-type="main">
-                                <img src="data:image.jpg;base64,@Convert.ToBase64String(products.photography)" alt="">
+                                <img src="data:image.jpg;base64,@Convert.ToBase64String(product.photography)" alt="">
                             </picture>
                             <div class="item-title">
-                                <a href="" class="item-name">@products.name</a>
+                                <a href="" class="item-name">@product.name</a>
                             </div>
-                            @products.description
+                            @product.description
                         </main>
                         <footer class="item-footer">
-                            <div class="item-price">@products.price руб.</div>
+                            <div class="item-price">@product.price руб.</div>
                             <button class="buy-item" type="button" data-type="select" data-size="medium">Выбрать</button>
                         </footer>
                     </article>
@@ -252,4 +127,4 @@
             </section>
         }
     </main>
-</div>
+</div> *@

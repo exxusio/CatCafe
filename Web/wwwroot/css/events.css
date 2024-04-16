@@ -38,10 +38,6 @@
     transform: rotateY(0);
 }
 
-.events-item.selected {
-    border: 2px solid blue; /* Пример стиля для выделения */
-}
-
 .events-item.flipped {
     transform: rotateY(180deg) scale(-1, 1);
 }

@@ -31,7 +31,7 @@ namespace PresentationLayer.Services
             var review = await _dataManager.reviews.GetById(ID, true);
 
             ViewVisitors visitor = new ViewVisitors();
-            visitor = await _visitorsService.GetViewById(review.ID);
+            visitor = await _visitorsService.GetViewById(review.visitor.ID);
 
             return new ViewReviews()
             {
@@ -44,19 +44,23 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditReviews> GetEditById(int ID = 0)
+        public async Task<EditReviews?> GetEditById(int ID = 0)
         {
             var review = await _dataManager.reviews.GetById(ID);
 
-            return new EditReviews()
+            if (review != null)
             {
-                ID = review.ID,
-                visitorID = review.visitorID,
-                text = review.text,
-                date = review.date,
-                time = review.time,
-                rating = review.rating
-            };
+                return new EditReviews()
+                {
+                    ID = review.ID,
+                    visitorID = review.visitorID,
+                    text = review.text,
+                    date = review.date,
+                    time = review.time,
+                    rating = review.rating
+                };
+            }
+            return null;
         }
 
         public async Task<ViewReviews> SaveEdit(EditReviews editReview)

@@ -36,16 +36,20 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditTables> GetEditById(int ID)
+        public async Task<EditTables?> GetEditById(int ID)
         {
             var table = await _dataManager.tables.GetById(ID);
 
-            return new EditTables()
+            if (table != null)
             {
-                ID = table.ID,
-                number = table.number,
-                capacity = table.capacity
-            };
+                return new EditTables()
+                {
+                    ID = table.ID,
+                    number = table.number,
+                    capacity = table.capacity
+                };
+            }
+            return null;
         }
 
         public async Task<ViewTables> SaveEdit(EditTables editTable)

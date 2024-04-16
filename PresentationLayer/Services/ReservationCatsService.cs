@@ -36,21 +36,25 @@ namespace PresentationLayer.Services
             return new ViewReservationCats() 
             { 
                 ID = reservationCat.ID,
-                reservationID = reservationCat.ID,
+                reservationID = reservationCat.reservationID,
                 cat = cat 
             };
         }
 
-        public async Task<EditReservationCats> GetEditById(int ID = 0)
+        public async Task<EditReservationCats?> GetEditById(int ID = 0)
         {
             var reservationCat = await _dataManager.reservationCats.GetById(ID);
 
-            return new EditReservationCats()
+            if (reservationCat != null)
             {
-                ID = reservationCat.ID,
-                reservationID = reservationCat.reservationID,
-                catID = reservationCat.catID
-            };
+                return new EditReservationCats()
+                {
+                    ID = reservationCat.ID,
+                    reservationID = reservationCat.reservationID,
+                    catID = reservationCat.catID
+                };
+            }
+            return null;
         }
 
         public async Task<ViewReservationCats> SaveEdit(EditReservationCats editReservationCat)

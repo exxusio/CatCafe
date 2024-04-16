@@ -46,21 +46,25 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditEmployees> GetEditById(int ID = 0)
+        public async Task<EditEmployees?> GetEditById(int ID = 0)
         {
             var employee = await _dataManager.employees.GetById(ID);
 
-            return new EditEmployees()
+            if (employee != null)
             {
-                ID = employee.ID,
-                name = employee.name,
-                surname = employee.surname,
-                positionID = employee.positionID,
-                about = employee.about,
-                photography = employee.photography,
-                salary = employee.salary,
-                hireDate = employee.hireDate
-            };
+                return new EditEmployees()
+                {
+                    ID = employee.ID,
+                    name = employee.name,
+                    surname = employee.surname,
+                    positionID = employee.positionID,
+                    about = employee.about,
+                    photography = employee.photography,
+                    salary = employee.salary,
+                    hireDate = employee.hireDate
+                };
+            }
+            return null;
         }
 
         public async Task<ViewEmployees> SaveEdit(EditEmployees editEmployee)

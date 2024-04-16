@@ -31,7 +31,7 @@ namespace PresentationLayer.Services
             var account = await _dataManager.accounts.GetById(ID, true);
 
             ViewVisitors visitor = new ViewVisitors();
-            visitor = await _visitorsService.GetViewById(account.ID);
+            visitor = await _visitorsService.GetViewById(account.visitor.ID);
 
             return new ViewAccounts()
             {
@@ -43,18 +43,22 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditAccounts> GetEditById(int ID = 0)
+        public async Task<EditAccounts?> GetEditById(int ID = 0)
         {
             var account = await _dataManager.accounts.GetById(ID);
 
-            return new EditAccounts()
+            if (account != null)
             {
-                ID = account.ID,
-                visitorID = account.visitorID,
-                login = account.login,
-                password = account.password,
-                registrationDate = account.registrationDate
-            };
+                return new EditAccounts()
+                {
+                    ID = account.ID,
+                    visitorID = account.visitorID,
+                    login = account.login,
+                    password = account.password,
+                    registrationDate = account.registrationDate
+                };
+            }
+            return null;
         }
 
         public async Task<ViewAccounts> SaveEdit(EditAccounts editAccount)

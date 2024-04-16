@@ -4,11 +4,11 @@
     {
         public int ID { get; set; }
 
+        public byte[] photography { get; set; } = null!;
+
         public string name { get; set; } = null!;
 
         public string description { get; set; } = null!;
-
-        public byte[] photography { get; set; } = null!;
 
         public decimal price { get; set; }
 

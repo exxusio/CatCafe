@@ -39,19 +39,23 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditEvents> GetEditById(int ID)
+        public async Task<EditEvents?> GetEditById(int ID)
         {
             var _event = await _dataManager.events.GetById(ID);
 
-            return new EditEvents()
+            if (_event != null)
             {
-                ID = _event.ID,
-                name = _event.name,
-                description = _event.description,
-                photography = _event.photography,
-                date = _event.date,
-                time = _event.time
-            };
+                return new EditEvents()
+                {
+                    ID = _event.ID,
+                    name = _event.name,
+                    description = _event.description,
+                    photography = _event.photography,
+                    date = _event.date,
+                    time = _event.time
+                };
+            }
+            return null;
         }
 
         public async Task<ViewEvents> SaveEdit(EditEvents editEvent)

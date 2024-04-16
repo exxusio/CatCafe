@@ -34,7 +34,7 @@ namespace PresentationLayer.Services
             ICollection<ViewContents> contentsList = new List<ViewContents>();
 
             ViewTables table = new ViewTables();
-            table = await _tablesService.GetViewById(order.table.ID);
+            table = order.table == null ? null : await _tablesService.GetViewById(order.table.ID);
 
             foreach (var item in order.contents)
                 contentsList.Add(await _contentsService.GetViewById(item.ID));
@@ -50,18 +50,22 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditOrders> GetEditById(int ID = 0)
+        public async Task<EditOrders?> GetEditById(int ID = 0)
         {
             var order = await _dataManager.orders.GetById(ID);
 
-            return new EditOrders()
+            if (order != null)
             {
-                ID = order.ID,
-                visitorID = order.visitorID,
-                tableID = order.tableID,
-                date = order.date,
-                time = order.time
-            };
+                return new EditOrders()
+                {
+                    ID = order.ID,
+                    visitorID = order.visitorID,
+                    tableID = order.tableID,
+                    date = order.date,
+                    time = order.time
+                };
+            }
+            return null;
         }
 
         public async Task<ViewOrders> SaveEdit(EditOrders editOrder)

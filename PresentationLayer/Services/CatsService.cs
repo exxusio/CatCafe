@@ -44,19 +44,23 @@ namespace PresentationLayer.Services
             };
         }
 
-        public async Task<EditCats> GetEditById(int ID = 0)
+        public async Task<EditCats?> GetEditById(int ID = 0)
         {
             var cat = await _dataManager.cats.GetById(ID);
-            
-            return new EditCats()
+
+            if (cat != null)
             {
-                ID = cat.ID,
-                name = cat.name,
-                breedID = cat.breedID,
-                photography = cat.photography,
-                dateOfBirth = cat.dateOfBirth,
-                descriptionCharacter = cat.descriptionCharacter
-            };
+                return new EditCats()
+                {
+                    ID = cat.ID,
+                    name = cat.name,
+                    breedID = cat.breedID,
+                    photography = cat.photography,
+                    dateOfBirth = cat.dateOfBirth,
+                    descriptionCharacter = cat.descriptionCharacter
+                };
+            }
+            return null;
         }
 
         public async Task<ViewCats> SaveEdit(EditCats editCat)

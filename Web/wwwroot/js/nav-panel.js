@@ -38,21 +38,46 @@ function handleScroll() {
 
 window.addEventListener('scroll', handleScroll);
 
-document.addEventListener('DOMContentLoaded', function() {
-    var links = document.querySelectorAll('a.items[data-type="list"]');
+document.addEventListener('DOMContentLoaded', function () {
+    var links = document.querySelectorAll('a.item[data-type="nav"]');
     var offset = 50;
-    links.forEach(function(link) {
-        link.addEventListener('click', function(event) {
+
+    links.forEach(function (link) {
+        link.addEventListener('click', function (event) {
             event.preventDefault();
-            var target = this.getAttribute('href');
-            var targetElement = document.querySelector(target);
-            if (targetElement) {
-                var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
-                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
+            if (window.location.pathname !== '/') {
+                localStorage.setItem('scrollToAnchor', this.getAttribute('href'));
+                window.location.href = '/';
+            } else {
+                SmoothProducts(this);
             }
         });
     });
+
+    var scrollToAnchor = localStorage.getItem('scrollToAnchor');
+    if (scrollToAnchor) {
+        window.addEventListener('load', function () {
+            setTimeout(() => {
+                var targetElement = document.querySelector(scrollToAnchor);
+                if (targetElement) {
+                    var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+                localStorage.removeItem('scrollToAnchor');
+            }, 400);
+        });
+    }
+
+    function SmoothProducts(_this) {
+        var target = _this.getAttribute('href');
+        var targetElement = document.querySelector(target);
+        var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }
 });
+
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -102,6 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+
+
 
 
 document.getElementById('input-min').addEventListener('input', function(event) {

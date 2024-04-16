@@ -6,9 +6,9 @@
 
         public int orderID { get; set; }
 
-        public int quantity { get; set; }
-
         public ViewProducts product { get; set; } = null!;
+
+        public int quantity { get; set; }
     }
 
     public class EditContents

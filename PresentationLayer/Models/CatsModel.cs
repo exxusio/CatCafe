@@ -4,15 +4,15 @@
     {
         public int ID { get; set; }
 
-        public string name { get; set; } = null!;
-
         public byte[] photography { get; set; } = null!;
+
+        public string name { get; set; } = null!;
 
         public DateOnly dateOfBirth { get; set; }
 
-        public string? descriptionCharacter { get; set; }
-
         public ViewBreeds breed { get; set; } = null!;
+
+        public string? descriptionCharacter { get; set; }
     }
 
     public class EditCats
