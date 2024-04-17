@@ -51,43 +51,45 @@ document.addEventListener('DOMContentLoaded', function() {
     let countMax = Math.round(parseFloat(getComputedStyle(eventsList).width) / 205.2) - 1;
     let currentIndex = 0;
 
-    const firstPopularItem = eventsItems[0];
-    firstPopularItem.classList.add('selected');
+    if (eventsItems.length > 0 && eventsItems[0] !== null && eventsItems[0] !== undefined) {
+        const firstPopularItem = eventsItems[0];
+        firstPopularItem.classList.add('selected');
 
 
-    window.addEventListener('resize', function() {
-        countMax = Math.round(parseFloat(getComputedStyle(eventsList).width) / 205.2) - 1;
-        // console.log(countMax);
+        window.addEventListener('resize', function () {
+            countMax = Math.round(parseFloat(getComputedStyle(eventsList).width) / 205.2) - 1;
 
-        if (!(currentIndex < eventsItems.length - countMax)) {
-            currentIndex = eventsItems.length - countMax;
-            eventsList.style.transform = `translate3d(-${currentIndex * 205.2}px, 0px, 0px)`;
+            if (!(currentIndex < eventsItems.length - countMax)) {
+                currentIndex = eventsItems.length - countMax;
+                eventsList.style.transform = `translate3d(-${currentIndex * 205.2}px, 0px, 0px)`;
+            }
+            if (currentIndex >= 0)
+                markSelected(currentIndex);
+        });
+
+
+        function markSelected(index) {
+            eventsItems.forEach(item => item.classList.remove('selected'));
+            eventsItems[index].classList.add('selected');
         }
-        markSelected(currentIndex);
-    });
-    
 
-    function markSelected(index) {
-        eventsItems.forEach(item => item.classList.remove('selected'));
-        eventsItems[index].classList.add('selected');
-    }
-
-    function next() {
-        if (currentIndex < eventsItems.length - countMax) {
-            currentIndex++;
-            eventsList.style.transform = `translate3d(-${currentIndex * 205.2}px, 0px, 0px)`;
-            markSelected(currentIndex);
+        function next() {
+            if (currentIndex > 0 && currentIndex < eventsItems.length - countMax) {
+                currentIndex++;
+                eventsList.style.transform = `translate3d(-${currentIndex * 205.2}px, 0px, 0px)`;
+                markSelected(currentIndex);
+            }
         }
-    }
 
-    function prev() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            eventsList.style.transform = `translate3d(-${currentIndex * 205.2}px, 0px, 0px)`;
-            markSelected(currentIndex);
+        function prev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                eventsList.style.transform = `translate3d(-${currentIndex * 205.2}px, 0px, 0px)`;
+                markSelected(currentIndex);
+            }
         }
-    }
 
-    prevButton.addEventListener('click', prev);
-    nextButton.addEventListener('click', next);
+        prevButton.addEventListener('click', prev);
+        nextButton.addEventListener('click', next);
+    }
 });

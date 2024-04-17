@@ -4,19 +4,26 @@ using PresentationLayer;
 using BusinessLayer;
 using Web.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using DataAccessLayer.Entities;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminPanelController : Controller
     {
         private DataManager _dataManager;
         private ServicesManager _servicesManager;
+        private UserManager<Accounts> _userManager;
+        private SignInManager<Accounts> _signInManager;
 
-        public AdminPanelController(DataManager dataManager)
+        public AdminPanelController(DataManager dataManager, UserManager<Accounts> userManager, SignInManager<Accounts> signInManager)
         {
             _dataManager = dataManager;
             _servicesManager = new ServicesManager(_dataManager);
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -111,7 +118,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.products.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -186,7 +193,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.productTypes.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -285,7 +292,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.cats.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -362,7 +369,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.breeds.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -447,7 +454,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.events.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -550,7 +557,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.employees.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -625,7 +632,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.positions.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -703,7 +710,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.tables.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -785,7 +792,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.visitors.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -821,50 +828,66 @@ namespace Web.Controllers
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password) || registrationDate == new DateOnly(1,1,1))
                 return BadRequest("Не все обязательные поля заполнены");
 
-            if (visitorID <= 0)
+            if (visitorID <= 0 || password.Length < 10)
                 return BadRequest("Некоторые данные неккоректны");
 
             var visitor = await _servicesManager.visitors.GetEditById(visitorID);
             if (visitor == null)
                 return UnprocessableEntity("Неправильный вторичный ключ");
 
-            await _servicesManager.accounts.SaveEdit(
-                   new EditAccounts()
-                   {
-                       visitorID = visitorID,
-                       login = login,
-                       password = password,
-                       registrationDate = registrationDate
-                   });
+            Accounts user = new Accounts()
+            {
+                visitorID = visitor.ID,
+                UserName = login,
+                password = password,
+                registrationDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+            };
 
-            return Ok("Данные успешно добавлены");
+            var result = await _userManager.CreateAsync(user, password);
+
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Visitor"));
+                return Ok("Данные успешно добавлены");
+            }
+            return BadRequest();
         }
 
         [HttpPut]
         public async Task<IActionResult> EditAccounts(int id, int visitorID, string login, string password, DateOnly registrationDate)
         {
-            var account = await _servicesManager.accounts.GetEditById(id);
-
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password) || registrationDate == new DateOnly(1, 1, 1))
                 return BadRequest(new { Message = "Не все обязательные поля заполнены", Values = Json(await _servicesManager.accounts.GetList()) });
 
-            if (visitorID <= 0)
+            if (visitorID <= 0 || password.Length < 10)
                 return BadRequest(new { Message = "Некоторые данные неккоректны", Values = Json(await _servicesManager.accounts.GetList()) });
 
             var visitor = await _servicesManager.visitors.GetEditById(visitorID);
             if (visitor == null)
                 return UnprocessableEntity(new { Message = "Неправильный вторичный ключ", Values = Json(await _servicesManager.accounts.GetList()) });
 
-            account = new EditAccounts()
+            var user = await _userManager.FindByIdAsync(Convert.ToString(id));
+
+            if (user == null)
+                return NotFound();
+
+            var result = await _userManager.ChangePasswordAsync(user, user.password, password);
+
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            await _userManager.SetUserNameAsync(user, login);
+
+
+            await _servicesManager.accounts.SaveEdit(new EditAccounts()
             {
                 ID = id,
                 visitorID = visitorID,
-                login = login,
                 password = password,
-                registrationDate = registrationDate
-            };
-
-            await _servicesManager.accounts.SaveEdit(account);
+                registrationDate = registrationDate,
+                login = login,
+            });
 
             return Ok(new { Message = "Изменения успешно внесены", Values = Json(await _servicesManager.accounts.GetList()) });
         }
@@ -872,16 +895,14 @@ namespace Web.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAccounts(int id)
         {
-            if (id > 0)
+            var user = await _userManager.FindByIdAsync(Convert.ToString(id));
+            if (user != null)
             {
-                var account = await _servicesManager.accounts.GetEditById(id);
-                if (account == null)
-                    return UnprocessableEntity("Объект не найден");
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return Ok("Данные упешно удалены");
                 else
-                {
-                    await _servicesManager.accounts.DeleteView(id);
-                    return Ok("Успешно удален");
-                }
+                    return BadRequest("Неправильный ID");
             }
             return BadRequest("Неправильный ID");
         }
@@ -973,7 +994,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.reservations.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -1054,7 +1075,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.reservationCats.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -1135,7 +1156,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.reservationTables.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -1232,7 +1253,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.orders.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -1321,7 +1342,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.contents.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -1418,7 +1439,7 @@ namespace Web.Controllers
                 else
                 {
                     await _servicesManager.reviews.DeleteView(id);
-                    return Ok("Успешно удален");
+                    return Ok("Данные упешно удалены");
                 }
             }
             return BadRequest("Неправильный ID");
@@ -1427,50 +1448,5 @@ namespace Web.Controllers
 
 
 
-        public async Task<IActionResult> SaveMaterial()
-        {
-            //string filePath = "C:\\Users\\vladi\\OneDrive\\Desktop\\Курсач\\макет\\content\\image\\pepperoni.png";
-            //byte[] photographyByteArray = System.IO.File.ReadAllBytes(filePath);
-
-            //EditProducts productsEditModel = new EditProducts()
-            //{
-            //    ID = 0,
-            //    name = "GGG",
-            //    typeID = 1,
-            //    description = "Description",
-            //    photography = photographyByteArray,
-            //    price = 0
-            //};
-
-            //await _servicesManager.products.SaveEdit(productsEditModel);
-
-
-
-
-
-            // Получаем список бронирований
-            var reservations = await _servicesManager.reservations.GetList();
-
-            // Фильтруем бронирования по дате и времени
-            var excludedReservations = reservations
-            .Where(r => r.date == new DateOnly(2024, 4, 15) && r.time <= new TimeOnly(18, 30, 0))
-            .SelectMany(r => r.cats.Select(c => c.ID)); // Получаем идентификаторы котов, которые нужно исключить
-
-            // Получаем всех котов, кроме тех, которые были забронированы на указанную дату и время
-            var allCats = await _servicesManager.cats.GetList(); // Предполагается, что у вас есть метод GetAll() для получения всех котов
-            var filteredCats = allCats.Where(cat => !excludedReservations.Contains(cat.ID)); // Исключаем забронированных котов
-
-            // Выводим имена всех котов, кроме забронированных
-            foreach (var cat in filteredCats)
-            {
-                Console.WriteLine("NAME ----------------- " + cat.name);
-            }
-
-
-
-
-
-            return RedirectToAction("main", "Main");
-        }
     }
 }

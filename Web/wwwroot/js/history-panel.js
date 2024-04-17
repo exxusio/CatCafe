@@ -135,28 +135,30 @@ function ViewVisitorOrders(orders) {
 
         const historyListItems = historyItemBlock2.querySelector('.history-list-items');
         order.contents.forEach(content => {
-            const historyListItem = document.createElement('article');
-            historyListItem.className = 'history-list-item';
+            for (var i = 0; i < content.quantity; i++) {
+                const historyListItem = document.createElement('article');
+                historyListItem.className = 'history-list-item';
 
 
-            const itemPicture = document.createElement('div');
-            itemPicture.className = 'item-picture';
-            itemPicture.setAttribute('data-type', 'history');
+                const itemPicture = document.createElement('div');
+                itemPicture.className = 'item-picture';
+                itemPicture.setAttribute('data-type', 'history');
 
 
-            const img = document.createElement('img');
-            img.src = 'data:image.jpg;base64,' + content.product.photography;
-            img.alt = '';
+                const img = document.createElement('img');
+                img.src = 'data:image.jpg;base64,' + content.product.photography;
+                img.alt = '';
 
 
-            const itemInfo = document.createElement('span');
-            itemInfo.className = 'history-item-info';
-            itemInfo.textContent = `${content.product.name}`;
+                const itemInfo = document.createElement('span');
+                itemInfo.className = 'history-item-info';
+                itemInfo.textContent = `${content.product.name}`;
 
-            itemPicture.appendChild(img);
-            historyListItem.appendChild(itemPicture);
-            historyListItem.appendChild(itemInfo);
-            historyListItems.appendChild(historyListItem);
+                itemPicture.appendChild(img);
+                historyListItem.appendChild(itemPicture);
+                historyListItem.appendChild(itemInfo);
+                historyListItems.appendChild(historyListItem);
+            }
         });
 
 
@@ -182,6 +184,46 @@ function ViewVisitorOrders(orders) {
         `;
 
 
+        const repeatOrder = footer.querySelector('.button[data-size="medium"]');
+
+        repeatOrder.addEventListener('click', () => {
+
+            var productIDs = [];
+            order.contents.forEach(content => {
+                for (var i = 0; i < content.quantity; i++) {
+                    productIDs.push(content.product.id);
+                }
+            });
+
+            const formData = new FormData();
+
+            productIDs.forEach(id => {
+                formData.append('productIDs[]', id);
+            });
+
+            fetch(`/RepeatOrderToBasket`, {
+                method: 'PUT',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text().then(message => {
+                            ViewNotify('Успех', message);
+                        });
+                    }
+                    else
+                        return response.text().then(errorMessage => {
+                            throw errorMessage;
+                        });
+                })
+                .catch(error => {
+                    ViewNotify('Ошибка', error);
+                });
+        });
+
+
+
+
         main.appendChild(historyItemBlock1);
         main.appendChild(historyItemBlock2);
         main.appendChild(historyItemBlock3);
@@ -198,6 +240,5 @@ function sumOrder(order) {
         price += content.product.price;
     });
 
-    console.log(price);
     return price;
 }

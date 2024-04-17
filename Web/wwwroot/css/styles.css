@@ -14,6 +14,29 @@
     flex-flow: column;
 }
 
+.notify-panel {
+    position: absolute;
+    cursor: pointer;
+    right: 0px;
+    top: 76px;
+}
+
+.notify {
+    background: rgb(55, 53, 53);
+    opacity: 0;
+    border-radius: 10px;
+    padding: 15px 20px;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 10px;
+    min-width: 250px;
+    transform: translateY(-20%) scale(1);
+    transition-property: opacity, transform, margin, scale;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
 body {
     font-family: 'Reef';
     margin: 0px;

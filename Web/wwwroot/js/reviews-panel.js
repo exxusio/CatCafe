@@ -144,10 +144,10 @@ function AddVisitorReview() {
                 setTimeout(() => {
                     location.reload();
                 }, 200);
-                console.log(message);
+                ViewNotify('Успех', message);
             })
             .catch(error => {
-                console.log(error);
+                ViewNotify('Успех', error.message);
             });
     });
 }

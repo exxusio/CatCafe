@@ -1,12 +1,10 @@
-﻿namespace DataAccessLayer.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace DataAccessLayer.Entities
 {
-    public partial class Accounts
+    public partial class Accounts : IdentityUser<int>
     {
-        public int ID { get; set; }
-
-        public int visitorID { get; set; }
-
-        public string login { get; set; } = null!;
+        public int visitorID { get; set; }  
 
         public string password { get; set; } = null!;
 

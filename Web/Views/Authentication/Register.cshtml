@@ -6,7 +6,6 @@
     <script src="~/js/login-birth.js"></script>
 }
 
-<form asp-action="Register" method="post">
     <div>
         <div class="form">
             <label for="" class="container">
@@ -28,7 +27,7 @@
             <label for="" class="container">
                 <span class="label">Имя</span>
                 <div class="container" data-type="secondary">
-                    <input type="text" class="input" placeholder="Анатолий" required>
+                    <input name="name" type="text" class="input" placeholder="Анатолий" required>
                 </div>
             </label>
         </div>
@@ -36,7 +35,7 @@
             <label for="" class="container">
                 <span class="label">Фамилия</span>
                 <div class="container" data-type="secondary">
-                    <input type="text" class="input" placeholder="Петров" required>
+                    <input name="surname" type="text" class="input" placeholder="Петров" required>
                 </div>
             </label>
         </div>
@@ -66,7 +65,6 @@
         </div>
     </div>
     <div class="buttons">
-        <button class="button" type="submit" data-types="register" data-type="primary" data-size="medium">Зарегистрироваться</button>
+        <button id="register" class="button" type="button" data-types="register" data-type="primary" data-size="medium">Зарегистрироваться</button>
         <button class="button" type="button" data-types="login" data-size="medium" onclick="location.href='/login?ReturnUrl=%2F'">Войти</button>
     </div>
-</form>

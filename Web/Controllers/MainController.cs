@@ -5,24 +5,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using DataAccessLayer.Entities;
 
 namespace Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class MainController : Controller
     {
         private DataManager _dataManager;
         private ServicesManager _servicesManager;
         private MainPageModel main = new MainPageModel();
+        private UserManager<Accounts> _userManager;
+        private SignInManager<Accounts> _signInManager;
+        private readonly BasketModel _basket;
 
-        private int _visitorID = 6;
-        private Dictionary<int, int> basketItems = new Dictionary<int, int>();
-
-        public MainController(DataManager dataManager)
+        public MainController(DataManager dataManager, UserManager<Accounts> userManager, SignInManager<Accounts> signInManager, BasketModel basket)
         {
             _dataManager = dataManager;
             _servicesManager = new ServicesManager(_dataManager);
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _basket = basket;
         }
+
+
+
+        #region Page
 
         [HttpGet]
         public async Task<IActionResult> Main()
@@ -60,13 +69,89 @@ namespace Web.Controllers
             return View(await _servicesManager.reviews.GetList());
         }
 
-        [HttpGet]//[Authorize(Roles = "Admin")]
+        [HttpGet][Authorize(Roles = "Admin")]
         public IActionResult Admin()
         {
             return View();
         }
 
+        #endregion
 
+
+
+        #region Main
+
+        [HttpPut]
+        public async Task<IActionResult> FilteredProducts(bool cheap = false, bool expensive = false, int min = 0, int max = 100, string search = "")
+        {
+            ICollection<ViewProducts> products = await _servicesManager.products.GetList();
+
+            products = products.Where(p => p.price >= min && p.price <= max).ToList();
+
+            if (search != "")
+                products = products.Where(p => (p.name).ToLower().Contains(search)).ToList();
+
+            if (cheap)
+                products = products.OrderBy(p => p.price).ToList();
+            else if (expensive)
+                products = products.OrderByDescending(p => p.price).ToList();
+
+            products = await SortingProducts(products);
+
+            return Json(products);
+        }
+
+        public async Task<ICollection<ViewProducts>> SortingProducts(ICollection<ViewProducts> products)
+        {
+            var pizzas = products.Where(p => p.type.name == "Пицца").ToList();
+            var otherProducts = products.Except(pizzas).ToList();
+
+            pizzas.Sort((p1, p2) => string.Compare(p1.type.name, p2.type.name));
+
+            return pizzas.Concat(otherProducts).ToList();
+
+        }
+
+        public async Task<ICollection<ViewProducts>> PopularPizzas()
+        {
+            var popularPizzaIDs = (await _servicesManager.orders
+                .GetList())
+                .SelectMany(order => order.contents)
+                .Where(content => content.product.type.name == "Пицца")
+                .GroupBy(content => new { content.orderID, content.product.ID })
+                .Select(group => group.First())
+                .GroupBy(content => content.product.ID)
+                .OrderByDescending(group => group.Count())
+                .Select(group => group.Key).Take(10).ToList();
+
+            ICollection<ViewProducts> pizzas = new List<ViewProducts>();
+
+            foreach (int ID in popularPizzaIDs)
+                pizzas.Add(await _servicesManager.products.GetViewById(ID));
+
+            return pizzas.ToList();
+        }
+
+        public async Task<ICollection<ViewEvents>> NewEvents()
+        {
+            DateTime startDate = DateTime.Today.AddDays(-10);
+
+            DateOnly date = new DateOnly(startDate.Year, startDate.Month, startDate.Day); ;
+
+            ICollection<ViewEvents> events = await _servicesManager.events.GetList();
+
+            var recentEvents = events.Where(e => e.date >= date);
+
+            var sortedEvents = recentEvents.OrderByDescending(e => e.date);
+
+            return sortedEvents.ToList();
+        }
+
+        #endregion
+
+
+
+        #region Visitor
 
         [HttpPost]
         public async Task<IActionResult> AddReview(string text, int rating)
@@ -87,7 +172,7 @@ namespace Web.Controllers
             await _servicesManager.reviews.SaveEdit(
                    new EditReviews()
                    {
-                       visitorID = _visitorID,
+                       visitorID = GetVisitorID(),
                        text = text,
                        date = date,
                        time = time,
@@ -110,7 +195,7 @@ namespace Web.Controllers
             ViewReservations reservation = await _servicesManager.reservations.SaveEdit(
                    new EditReservations()
                    {
-                       visitorID = _visitorID,
+                       visitorID = GetVisitorID(),
                        date = date,
                        time = time
                    });
@@ -139,36 +224,40 @@ namespace Web.Controllers
             return Ok("Отзыв оставлен");
         }
 
-        [HttpPut]
-        public async Task<IActionResult> FilteredProducts(bool cheap = false, bool expensive = false, int min = 0, int max = 100, string search = "")
-        {
-            ICollection<ViewProducts> products = await _servicesManager.products.GetList();
-
-            products = products.Where(p => p.price >= min && p.price <= max).ToList();
-
-            if (search != "")
-                products = products.Where(p => (p.name).ToLower().Contains(search)).ToList();
-
-            if (cheap)
-                products = products.OrderBy(p => p.price).ToList();
-            else if (expensive)
-                products = products.OrderByDescending(p => p.price).ToList();
-
-            products = await SortingProducts(products);
-
-            return Json(products);
-        }
-
         [HttpGet]
         public async Task<IActionResult> VisitorOrders()
         {
             ICollection<ViewOrders> orders = (await _servicesManager.orders
                 .GetList())
-                .Where(o => o.visitorID == _visitorID)
+                .Where(o => o.visitorID == GetVisitorID())
                 .ToList();
-            
+
             return Json(orders);
         }
+
+        public int GetVisitorID()
+        {
+            int _visitorID = 0;
+            var user = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
+            if (user != null)
+            {
+                _visitorID = user.visitorID;
+            }
+            return _visitorID;
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Redirect("/login");
+        }
+
+        #endregion
+
+
+
+        #region Reservation
 
         [HttpPut]
         public async Task<IActionResult> CheckTables(int month, int day, TimeOnly time)
@@ -256,75 +345,140 @@ namespace Web.Controllers
             return Ok(availableCats);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddProductToBasket(int id)
+        #endregion
+
+
+
+        #region Basket
+
+        [HttpPut]
+        public IActionResult AddToBasket(int id, int action = 0)
         {
-            ViewProducts product = await _servicesManager.products.GetViewById(id);
+            ViewProducts product = _servicesManager.products.GetViewById(id).GetAwaiter().GetResult();
 
-            if(product != null)
+            if (product != null)
             {
-                if (basketItems.ContainsKey(id))
-                    basketItems[id]++;
-                else
-                    basketItems.Add(id, 1);
+                var cart = _basket.Get(Convert.ToString(GetVisitorID()));
 
-                Console.WriteLine(basketItems[id] + "   ================================================================");
-                return Ok();
+                if (cart.ContainsKey(id))
+                    cart[id] += action;
+                else
+                    cart.Add(id, 1);
+
+                if(cart[id] <= 0)
+                    cart.Remove(id);
+
+                _basket.Update(Convert.ToString(GetVisitorID()), cart);
+                return Ok($"{product.name} добавлено в корзину");
+            }
+            return BadRequest("Продукт не найден");
+        }
+        
+        [HttpPut]
+        public IActionResult RepeatOrderToBasket(List<int> productIDs)
+        {
+            if (productIDs.Count <= 0)
+                return BadRequest("Упс! Продуктов нет");
+
+            var cart = _basket.Get(Convert.ToString(GetVisitorID()));
+
+            foreach (int id in productIDs)
+            {
+                ViewProducts product = _servicesManager.products.GetViewById(id).GetAwaiter().GetResult();
+
+                if (product != null)
+                {
+                    if (cart.ContainsKey(id))
+                        cart[id] += 1;
+                    else
+                        cart.Add(id, 1);
+
+                    if (cart[id] <= 0)
+                        cart.Remove(id);
+                }
+                else
+                    return BadRequest("Какой-то из продуктов не найден");
             }
 
-            return NotFound();
+            _basket.Update(Convert.ToString(GetVisitorID()), cart);
+            return Ok();
         }
 
-
-
-
-
-
-
-        public async Task<ICollection<ViewProducts>> SortingProducts(ICollection<ViewProducts> products)
+        [HttpPut]
+        public IActionResult RemoveFromBasket(int id)
         {
-            var pizzas = products.Where(p => p.type.name == "Пицца").ToList();
-            var otherProducts = products.Except(pizzas).ToList();
+            var cart = _basket.Get(Convert.ToString(GetVisitorID()));
 
-            pizzas.Sort((p1, p2) => string.Compare(p1.type.name, p2.type.name));
+            if (cart.ContainsKey(id))
+            {
+                cart.Remove(id);
+                _basket.Update(Convert.ToString(GetVisitorID()), cart);
+            }
+            else
+                return BadRequest("Продукта больше нет в корзине");
 
-            return pizzas.Concat(otherProducts).ToList();
-
+            return Ok();
         }
 
-        public async Task<ICollection<ViewProducts>> PopularPizzas()
+        [HttpGet]
+        public IActionResult ClearBasket()
         {
-            var popularPizzaIDs = (await _servicesManager.orders
-                .GetList())
-                .SelectMany(order => order.contents)
-                .Where(content => content.product.type.name == "Пицца")
-                .GroupBy(content => new { content.orderID, content.product.ID })
-                .Select(group => group.First())
-                .GroupBy(content => content.product.ID)
-                .OrderByDescending(group => group.Count())
-                .Select(group => group.Key).Take(10).ToList();
+            var cart = new Dictionary<int, int>();
+            _basket.Update(Convert.ToString(GetVisitorID()), cart);
 
-            ICollection<ViewProducts> pizzas = new List<ViewProducts>();
-
-            foreach (int ID in popularPizzaIDs)
-                pizzas.Add(await _servicesManager.products.GetViewById(ID));
-
-            return pizzas.ToList();
+            return Ok();
         }
 
-        public async Task<ICollection<ViewEvents>> NewEvents()
+        [HttpGet]
+        public async Task<IActionResult> ViewBasket()
         {
-            DateTime startDate = DateTime.Today.AddDays(-10);
+            var cart = _basket.Get(Convert.ToString(GetVisitorID()));
 
-            DateOnly date = new DateOnly(startDate.Year, startDate.Month, startDate.Day); ;
+            List<KeyValuePair<ViewProducts, int>> products = new List<KeyValuePair<ViewProducts, int>>();
 
-            ICollection<ViewEvents> events = await _servicesManager.events.GetList();
+            foreach (var product in cart)
+            {
+                var viewProduct = await _servicesManager.products.GetViewById(product.Key);
+                products.Add(new KeyValuePair<ViewProducts, int>(viewProduct, product.Value));
+            }
 
-            var recentEvents = events.Where(e => e.date >= date);
-
-            var sortedEvents = recentEvents.OrderByDescending(e => e.date);
-
-            return sortedEvents.ToList();
+            return Json(products);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmOrder()
+        {
+            var cart = _basket.Get(Convert.ToString(GetVisitorID()));
+            
+            if (cart == null)
+                return BadRequest("Корзина пуста");
+            
+            ViewOrders order = await _servicesManager.orders.SaveEdit(new EditOrders()
+            {
+                tableID = null,
+                visitorID = GetVisitorID(),
+                date = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),
+                time = new TimeOnly(DateTime.Now.Hour, DateTime.Now.Minute)
+            });
+
+
+            foreach(var product in cart)
+            {
+                await _servicesManager.contents.SaveEdit(new EditContents()
+                {
+                    orderID = order.ID,
+                    productID = product.Key,
+                    quantity = product.Value
+                });
+            }
+
+            ClearBasket();
+            return Ok();
+        }
+
+        #endregion
+
+
+
     }
 }

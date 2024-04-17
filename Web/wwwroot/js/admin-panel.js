@@ -498,37 +498,40 @@ function ViewTableData() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    var firstItem = data[0];
+                    if (data !== null && data !== undefined && data[0] !== null && data[0] !== undefined) {
 
-                    var paramNames = Object.keys(firstItem).map(key => {
-                        if (typeof firstItem[key] === 'object' && !Array.isArray(firstItem[key])) {
-                            return key + 'ID';
-                        } else if (Array.isArray(firstItem[key])) {
-                            return null;
-                        } else {
-                            return key;
-                        }
-                    }).filter(key => key !== null);
+                        var firstItem = data[0];
+
+                        var paramNames = Object.keys(firstItem).map(key => {
+                            if (typeof firstItem[key] === 'object' && !Array.isArray(firstItem[key])) {
+                                return key + 'ID';
+                            } else if (Array.isArray(firstItem[key])) {
+                                return null;
+                            } else {
+                                return key;
+                            }
+                        }).filter(key => key !== null);
 
 
-                    //const transformedData = data.map(item => {
-                    //    const newItem = {};
+                        //const transformedData = data.map(item => {
+                        //    const newItem = {};
 
-                    //    Object.keys(item).forEach(key => {
-                    //        if (typeof item[key] === 'object' && item[key] !== null && !Array.isArray(item[key])) {
-                    //            newItem[key + 'ID'] = item[key].id;
-                    //        } else {
-                    //            newItem[key] = item[key];
-                    //        }
-                    //    });
+                        //    Object.keys(item).forEach(key => {
+                        //        if (typeof item[key] === 'object' && item[key] !== null && !Array.isArray(item[key])) {
+                        //            newItem[key + 'ID'] = item[key].id;
+                        //        } else {
+                        //            newItem[key] = item[key];
+                        //        }
+                        //    });
 
-                    //    return newItem;
-                    //});
+                        //    return newItem;
+                        //});
 
-                    var title = event.target.closest('.table-element').querySelector('.table-name span').innerText;
-                    tableName = event.target.closest('.table-element').querySelector('.table-name').getAttribute('name');
+                        var title = event.target.closest('.table-element').querySelector('.table-name span').innerText;
+                        tableName = event.target.closest('.table-element').querySelector('.table-name').getAttribute('name');
 
-                    CreateVue(/*transformedData*/transformData(data), paramNames, title, tableName);
+                        CreateVue(/*transformedData*/transformData(data), paramNames, title, tableName);
+                    }
                 });
         });
     });
@@ -559,10 +562,10 @@ function AddTableData() {
                     inputs.forEach(input => {
                         input.value = "";
                     })
-                    console.log(message);
+                    ViewNotify('Успех', message);
                 })
                 .catch(error => {
-                    console.log(error);
+                    ViewNotify('Ошибка', error.message);
                 });
         });
     });
@@ -614,7 +617,7 @@ function EditTableData(tableName) {
                         const errorData = JSON.parse(error.message);
 
                         const errorMessage = errorData.error.message;
-                        console.log(errorMessage);
+                        ViewNotify('Ошибка', errorMessage);
 
                         const otherData = errorData.error.values;
 
@@ -638,7 +641,7 @@ function EditTableData(tableName) {
                         vueInstance.data = transformData(data.values.value);
 
                         if (data.message !== undefined)
-                            console.log(data.message);
+                            ViewNotify('Успех', data.message);
                     });
             }
         });
@@ -710,17 +713,16 @@ Vue.component('charttable',{
                         return response.text();
                     })
                     .then(message => {
-                        console.log(message);
+                        this.data.splice(index, 1);
+                        this.disabledInputs.splice(index, 1);
+                        if (this.activeEditIndex === index) {
+                            this.activeEditIndex = null;
+                        }
+                        ViewNotify('Успех', message);
                     })
                     .catch(error => {
-                        console.log(error);
+                        ViewNotify('Ошибка', error.message);
                     });
-
-                this.data.splice(index, 1);
-                this.disabledInputs.splice(index, 1);
-                if (this.activeEditIndex === index) {
-                    this.activeEditIndex = null;
-                }
             }
             else {
                 const inputsId = document.querySelectorAll(`form[name="${index}"] input[name="id"]`);
@@ -759,7 +761,7 @@ Vue.component('charttable',{
                                 vueInstance.data = transformData(data.values.value);
                             })
                             .catch(error => {
-                                console.log(error);
+                                ViewNotify('Ошибка', error.message);
                             });
                     }
                 });

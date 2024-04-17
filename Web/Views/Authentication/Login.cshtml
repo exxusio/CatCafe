@@ -2,6 +2,10 @@
     ViewData["Title"] = " | Вход";
 }
 
+@section Scripts {
+    <script src="~/js/login-account.js"></script>
+}
+
 <div>
     <div class="form">
         <label for="" class="container">
@@ -22,6 +26,6 @@
     </div>
 </div>
 <div class="buttons">
-    <button class="button" type="button" data-types="login" data-size="medium">Войти</button>
+    <button id="login" class="button" type="button" data-types="login" data-size="medium">Войти</button>
     <button class="button" type="button" data-types="register" data-type="primary" data-size="medium" onclick="location.href='/register?ReturnUrl=%2F'">Зарегистрироваться</button>
 </div>

@@ -280,3 +280,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+
+
+
+var logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener('click', (event) => {
+
+    fetch(`/Logout`, {
+        method: 'GET'
+    }).then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    });
+});

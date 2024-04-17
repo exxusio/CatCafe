@@ -99,18 +99,37 @@ function displayProducts(products, uniqueTypes) {
             article.className = 'group-item';
             article.setAttribute('name', product.id);
 
+
+
             article.addEventListener('click', () => {
                 const formData = new FormData();
 
                 var id = article.getAttribute('name');
 
                 formData.append('id', id);
+                formData.append('action', 1);
 
-                fetch(`/AddProductToBasket`, {
-                    method: 'POST',
+                fetch(`/AddToBasket`, {
+                    method: 'PUT',
                     body: formData
-                });
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.text().then(message => {
+                                ViewNotify('Успех', message);
+                            });
+                        }
+                        else
+                            return response.text().then(errorMessage => {
+                                throw errorMessage;
+                            });
+                    })
+                    .catch(error => {
+                        ViewNotify('Ошибка', error);
+                    });
             });
+
+
 
             const main = document.createElement('main');
             main.className = 'item';

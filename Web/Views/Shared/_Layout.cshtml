@@ -38,10 +38,10 @@
                 <a class="item" data-type="info" asp-area="" asp-action="workers">Наши работники</a>
                 <a class="item" data-type="info" asp-area="" asp-action="reviews">Отзывы</a>
 
-                @* @if (User.IsInRole("Admin"))
-                { *@
+                 @if (User.IsInRole("Admin"))
+                { 
                     <a class="item" data-type="info" asp-area="" asp-action="admin">Администрирование</a>
-                @* } *@ 
+                }  
             </div>
         </div>
 
@@ -75,7 +75,7 @@
                 </a>
             </div>
             <div class="right">
-                <button class="button" type="button" data-type="auth" data-size="small">Выйти</button>
+                <button id="logout" class="button" type="button" data-type="auth" data-size="small">Выйти</button>
             </div>
         </header>
 
@@ -180,6 +180,7 @@
 
 
                     <button class="button" data-type="primary" data-types="nav" data-size="medium" type="button">Корзина</button>
+                    <div class="notify-panel"></div>
                 </div>
             </div>
         </nav>
@@ -203,6 +204,7 @@
     <script src="~/js/reservation-panel.js"></script>
     <script src="~/js/table-panel.js"></script>
     <script src="~/js/history-panel.js"></script>
+    <script src="~/js/notify.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

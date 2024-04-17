@@ -48,6 +48,10 @@
     box-shadow: rgba(6, 5, 50, 0.15) 0px 0px 10px -4px;
 }
 
+
+.popular-item.selected {
+}
+
 .popular-picture {
     width: 80px;
     height: 80px;

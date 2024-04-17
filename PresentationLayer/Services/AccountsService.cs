@@ -21,7 +21,7 @@ namespace PresentationLayer.Services
             List<ViewAccounts> accountsList = new List<ViewAccounts>();
 
             foreach (var item in accounts)
-                accountsList.Add(await GetViewById(item.ID));
+                accountsList.Add(await GetViewById(item.Id));
 
             return accountsList;
         }
@@ -35,8 +35,8 @@ namespace PresentationLayer.Services
 
             return new ViewAccounts()
             {
-                ID = account.ID,
-                login = account.login,
+                ID = account.Id,
+                login = account.UserName,
                 password = account.password,
                 registrationDate = account.registrationDate,
                 visitor = visitor
@@ -51,9 +51,9 @@ namespace PresentationLayer.Services
             {
                 return new EditAccounts()
                 {
-                    ID = account.ID,
+                    ID = account.Id,
                     visitorID = account.visitorID,
-                    login = account.login,
+                    login = account.UserName,
                     password = account.password,
                     registrationDate = account.registrationDate
                 };
@@ -71,13 +71,13 @@ namespace PresentationLayer.Services
                 account = new Accounts();
 
             account.visitorID = editAccount.visitorID;
-            account.login = editAccount.login;
+            account.UserName = editAccount.login;
             account.password = editAccount.password;
             account.registrationDate = editAccount.registrationDate;
 
             await _dataManager.accounts.Save(account);
 
-            return await GetViewById(account.ID);
+            return await GetViewById(account.Id);
         }
 
         public async Task DeleteView(int ID)

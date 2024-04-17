@@ -17,7 +17,7 @@ namespace BusinessLayer.Implementations
         public async Task<IEnumerable<Accounts>> GetAll(bool includeVisitors = false)
         {
             if (includeVisitors)
-                return await _context.Set<Accounts>().Include(x => x.visitorID).AsNoTracking().ToListAsync();
+                return await _context.Set<Accounts>().Include(x => x.visitor).AsNoTracking().ToListAsync();
             else
                 return await _context.accounts.ToListAsync();
         }
@@ -25,14 +25,14 @@ namespace BusinessLayer.Implementations
         public async Task<Accounts> GetById(int ID, bool includeVisitor = false)
         {
             if (includeVisitor)
-                return await _context.Set<Accounts>().Include(x => x.visitorID).AsNoTracking().FirstOrDefaultAsync(x => x.ID == ID);
+                return await _context.Set<Accounts>().Include(x => x.visitor).AsNoTracking().FirstOrDefaultAsync(x => Convert.ToInt32(x.Id) == ID);
             else
-                return await _context.accounts.FirstOrDefaultAsync(x => x.ID == ID);
+                return await _context.accounts.FirstOrDefaultAsync(x => x.Id == ID);
         }
 
         public async Task Save(Accounts account)
         {
-            if (account.ID == 0)
+            if (account.Id == 0)
                 _context.accounts.Add(account);
             else
                 _context.Entry(account).State = EntityState.Modified;

@@ -363,10 +363,23 @@ function AddReservationClick() {
                 method: 'POST',
                 body: formData
             })
-                /*.then(response => {
-                    return response.json();
-                })*/;
+            .then(response => {
+                if (response.ok) {
+                    return response.text().then(message => {
+                        ViewNotify('Успех', message);
+                    });
+                }
+                else
+                    return response.text().then(errorMessage => {
+                        throw errorMessage;
+                    });
+            })
+            .catch(error => {
+                ViewNotify('Ошибка', error);
+            });
             closereservation1();
         }
+        else
+            ViewNotify('Ошибка', 'Не все обязательные поля заполнены');
     });
 }

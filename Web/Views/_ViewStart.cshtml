@@ -1,4 +1,4 @@
 ﻿@{
-    Layout = "_Layout";
-    //Layout = User.Identity.IsAuthenticated ? "_Layout" : "_Authentication";
+    //Layout = "_Layout";
+    Layout = User.Identity.IsAuthenticated ? "_Layout" : "_Authentication";
 }

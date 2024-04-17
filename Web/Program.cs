@@ -2,7 +2,8 @@ using BusinessLayer;
 using BusinessLayer.Implementations;
 using BusinessLayer.Interfaces;
 using DataAccessLayer;
-using Microsoft.AspNetCore.Identity;
+using DataAccessLayer.Entities;
+using Web.Models;
 using Microsoft.EntityFrameworkCore;
 using PresentationLayer;
 
@@ -12,27 +13,43 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseSqlServer(connectionString);
-});
+}).AddIdentity<Accounts, AccountsRole>(config =>
+{
+    config.Password.RequireDigit = false;
+    config.Password.RequireLowercase = false;
+    config.Password.RequireUppercase = false;
+    config.Password.RequireNonAlphanumeric = false;
+    config.Password.RequiredLength = 10;
+})
+.AddEntityFrameworkStores<DataBaseContext>();
 
-//builder.Services.AddSession();
+
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<BasketModel>();
+
+
 
 AddTransient();
 
 
 //======
-//builder.Services.AddDefaultIdentity<IdentityUser>(options
+//builder.Services.AddDefaultIdentity<Accounts>(options
 //    => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<DataBaseContext>();
 
-//builder.Services.ConfigureApplicationCookie(options =>
-//{
-//    options.LoginPath = "/login";
-//    options.ReturnUrlParameter = "ReturnUrl";
-//});
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/login";
+    options.AccessDeniedPath = "/";
+    options.ReturnUrlParameter = "ReturnUrl";
+});
 //======
 
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 
@@ -85,7 +102,7 @@ app.MapGet("/main", () => { return Results.Redirect("/"); });
 
 
 //======
-//app.MapRazorPages();
+app.MapRazorPages();
 //======
 
 

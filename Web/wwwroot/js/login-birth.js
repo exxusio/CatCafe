@@ -57,3 +57,83 @@ if (birthContainer) {
     }
     birthContainer.appendChild(yearSelect);
 }
+
+
+
+
+
+var registerButton = document.getElementById('register');
+
+registerButton.addEventListener('click', (event) => {
+
+    const loginInput = document.querySelector('input[type="login"]');
+    const emailInput = document.querySelector('input[type="email"]');
+    const nameInput = document.querySelector('input[name="name"]');
+    const surnameInput = document.querySelector('input[name="surname"]');
+    const telInput = document.querySelector('input[type="tel"]');
+    const passInput = document.querySelector('input[type="pass"]');
+
+    const dayInput = document.querySelector('.input.day');
+    const monthInput = document.querySelector('.input.month');
+    const yearInput = document.querySelector('.input.year');
+
+    
+    if ((loginInput !== null && loginInput !== undefined)
+        && (emailInput !== null && emailInput !== undefined)
+        && (nameInput !== null && nameInput !== undefined)
+        && (surnameInput !== null && surnameInput !== undefined)
+        && (telInput !== null && telInput !== undefined)
+        && (passInput !== null && passInput !== undefined)
+        && (monthInput !== null && monthInput !== undefined)
+        && (yearInput !== null && yearInput !== undefined)
+        && (dayInput !== null && dayInput !== undefined)) {
+
+        if (loginInput.value !== ''
+            && emailInput.value !== ''
+            && nameInput.value !== ''
+            && surnameInput.value !== ''
+            && telInput.value !== ''
+            && passInput.value !== ''
+            && monthInput.value !== ''
+            && yearInput.value !== ''
+            && dayInput.value !== '') {
+
+
+
+            const formData = new FormData();
+
+            formData.append('login', loginInput.value);
+            formData.append('email', emailInput.value);
+            formData.append('name', nameInput.value);
+            formData.append('surname', surnameInput.value);
+            formData.append('phoneNumber', telInput.value);
+            formData.append('day', dayInput.value);
+            formData.append('month', monthInput.value);
+            formData.append('year', yearInput.value);
+            formData.append('password', passInput.value);
+
+
+            fetch(`/RegisterAccount`, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        localStorage.setItem('executeAction', 'true');
+                        window.location.href = response.url;
+                    }
+                    else
+                        return response.text().then(errorMessage => {
+                            throw errorMessage;
+                        });
+                })
+                .catch(error => {
+                    ViewNotify('Ошибка', error);
+                });
+        }
+        else
+            ViewNotify('Ошибка', 'Не все обязательные поля заполнены');
+    }
+    else
+        ViewNotify('Ошибка', 'Поля ввода не обнаружены ;(');
+});

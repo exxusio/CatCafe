@@ -115,7 +115,7 @@
     }
 
     .group-item {
-        width: 218px;
+        width: 210px;
         margin-right: 29.3333px;
     }
 }
@@ -124,5 +124,10 @@
 {
     .panel[data-type="main"] {
         width: 640px;
+    }
+
+    .group-item {
+        width: 184px;
+        margin-right: 29.3333px;
     }
 }
